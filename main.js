@@ -402,8 +402,7 @@ async function signOutUser() {
   window.location.reload();
 }
 
-/* ── Auth Flow (login/signup/dashboard/resource pages) ───── */
-async function initAuthFlow() {
+/* ── Auth Flow (login/signup/dashboard/resource pages) ───── */async function initAuthFlow() {
   const page   = document.body.dataset.page;
   if (!page) return;
 
@@ -413,8 +412,7 @@ async function initAuthFlow() {
   /* ── Supabase not configured yet ── */
   if (!client) {
     if (authStatus) {
-      authStatus.textContent = '⚙ Supabase not configured — set SUPABASE_URL and SUPABASE_ANON_KEY in assets/js/main.js.';
-    }
+      authStatus.textContent = '⚙ Supabase not configured — set SUPABASE_URL and SUPABASE_ANON_KEY in assets/js/main.js.';    }
     if (page === 'dashboard') {
       showToast('Supabase not configured. See setup guide.');
     }
@@ -428,7 +426,6 @@ async function initAuthFlow() {
     const { data } = await client.auth.getSession();
     session = data.session;
   } catch(e) { session = null; }
-
   /* ── Page-specific routing ── */
   if (page === 'dashboard' && !session) {
     window.location.href = 'login.html'; return;
@@ -515,6 +512,7 @@ async function initAuthFlow() {
 
   /* ── Auth state listener (session expiry, etc.) ── */
   client.auth.onAuthStateChange((_event, updatedSession) => {
+    initResourceVault(updatedSession);
     if (page === 'dashboard' && !updatedSession) {
       window.location.href = 'login.html';
     }
