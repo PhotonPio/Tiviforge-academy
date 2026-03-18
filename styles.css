@@ -41,11 +41,11 @@
     ══════════════════════════════════════════ */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; font-size: 16px; -webkit-font-smoothing: antialiased; }
-    body { background: var(--forge-black); color: var(--forge-white); font-family: var(--font-ui); line-height: 1.6; overflow-x: hidden; cursor: none; }
+    body { background: var(--forge-black); color: var(--forge-white); font-family: var(--font-ui); line-height: 1.6; overflow-x: hidden; cursor: auto; }
     ::selection { background: var(--solar-blue); color: #fff; }
     a { color: inherit; text-decoration: none; }
     img { max-width: 100%; display: block; }
-    button { cursor: none; font-family: inherit; border: none; background: none; }
+    button { cursor: pointer; font-family: inherit; border: none; background: none; }
     input, textarea, select { font-family: inherit; }
 
     /* ══════════════════════════════════════════
