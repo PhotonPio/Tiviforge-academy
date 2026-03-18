@@ -1,4 +1,5 @@
-/* ══════════════════════════════════════════
+<!-- TiviForge Multi-Page v2.1 — GitHub Pages Ready -->
+    /* ══════════════════════════════════════════
        DESIGN TOKENS — Solar Forge System
     ══════════════════════════════════════════ */
     :root {
@@ -911,100 +912,22 @@
 /* Multi-page additions */
 .page-shell {
   min-height: 100vh;
+  padding-top: 140px;
 }
 .page-hero {
-  min-height: clamp(420px, 68vh, 760px);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: calc(var(--nav-h) + 72px) var(--pad-x) 88px;
-  overflow: hidden;
-  isolation: isolate;
-  background:
-    radial-gradient(ellipse 58% 52% at 78% 26%, rgba(0,102,204,0.16) 0%, transparent 68%),
-    radial-gradient(ellipse 42% 40% at 18% 82%, rgba(0,204,102,0.11) 0%, transparent 60%),
-    linear-gradient(180deg, rgba(11,13,18,0.88) 0%, rgba(5,5,7,0.98) 100%);
-}
-.page-hero::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background-image:
-    linear-gradient(rgba(0,102,204,0.05) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0,102,204,0.05) 1px, transparent 1px);
-  background-size: 72px 72px;
-  mask-image: radial-gradient(ellipse 78% 70% at 50% 35%, black, transparent);
-  opacity: 0.8;
-  z-index: -2;
-}
-.page-hero::after {
-  content: "";
-  position: absolute;
-  right: clamp(-80px, 2vw, 32px);
-  top: 50%;
-  width: clamp(260px, 34vw, 520px);
-  height: clamp(260px, 34vw, 520px);
-  transform: translateY(-50%);
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(0,102,204,0.14) 0%, rgba(0,204,102,0.06) 42%, transparent 72%);
-  border: 1px solid rgba(0,102,204,0.12);
-  box-shadow: 0 0 120px rgba(0,102,204,0.12);
-  animation: solarPulse 9s ease-in-out infinite;
-  z-index: -1;
-}
-.page-hero .eyebrow {
-  margin-bottom: 28px;
+  padding: calc(var(--nav-h) + 40px) var(--pad-x) 40px;
+  background: radial-gradient(circle at 20% 10%, rgba(0,102,204,0.2), transparent 42%), radial-gradient(circle at 80% 30%, rgba(0,204,102,0.15), transparent 40%), var(--forge-black);
 }
 .page-hero h1 {
-  max-width: 10ch;
   font-family: var(--font-display);
-  font-size: clamp(3.2rem, 8vw, 7.1rem);
-  font-weight: 300;
-  line-height: 0.92;
-  letter-spacing: -0.03em;
-  margin: 0;
-  color: var(--forge-white);
-  text-shadow: 0 10px 40px rgba(0,0,0,0.28);
+  font-size: clamp(2.1rem, 6vw, 4.4rem);
+  line-height: 0.95;
+  margin: 12px 0 10px;
 }
 .page-hero p {
-  max-width: 720px;
-  margin-top: 24px;
+  max-width: 700px;
   color: var(--forge-ash);
-  font-family: var(--font-display);
-  font-size: clamp(1.08rem, 2vw, 1.6rem);
-  font-style: italic;
-  font-weight: 300;
-  line-height: 1.45;
-}
-body[data-page="academy"] .page-hero {
-  background:
-    radial-gradient(ellipse 54% 48% at 80% 22%, rgba(0,102,204,0.18) 0%, transparent 68%),
-    radial-gradient(ellipse 38% 34% at 14% 84%, rgba(0,204,102,0.08) 0%, transparent 60%),
-    linear-gradient(180deg, rgba(11,13,18,0.9) 0%, rgba(5,5,7,1) 100%);
-}
-body[data-page="calculators"] .page-hero {
-  background:
-    radial-gradient(ellipse 56% 50% at 76% 24%, rgba(0,204,102,0.14) 0%, transparent 64%),
-    radial-gradient(ellipse 44% 42% at 18% 78%, rgba(0,102,204,0.16) 0%, transparent 62%),
-    linear-gradient(180deg, rgba(11,13,18,0.88) 0%, rgba(5,5,7,1) 100%);
-}
-body[data-page="resources"] .page-hero {
-  background:
-    radial-gradient(ellipse 54% 50% at 80% 24%, rgba(0,102,204,0.18) 0%, transparent 66%),
-    radial-gradient(ellipse 34% 32% at 22% 74%, rgba(0,204,102,0.12) 0%, transparent 58%),
-    linear-gradient(180deg, rgba(11,13,18,0.9) 0%, rgba(5,5,7,1) 100%);
-}
-body[data-page="about"] .page-hero {
-  background:
-    radial-gradient(ellipse 62% 58% at 78% 22%, rgba(0,102,204,0.2) 0%, transparent 66%),
-    radial-gradient(ellipse 36% 34% at 16% 80%, rgba(0,204,102,0.1) 0%, transparent 58%),
-    linear-gradient(180deg, rgba(11,13,18,0.92) 0%, rgba(5,5,7,1) 100%);
-}
-body[data-page="apply"] .page-hero {
-  background:
-    radial-gradient(ellipse 56% 52% at 78% 24%, rgba(0,204,102,0.12) 0%, transparent 64%),
-    radial-gradient(ellipse 42% 40% at 18% 78%, rgba(0,102,204,0.18) 0%, transparent 62%),
-    linear-gradient(180deg, rgba(11,13,18,0.9) 0%, rgba(5,5,7,1) 100%);
+  font-size: 0.95rem;
 }
 .auth-wrap {
   min-height: 100vh;
@@ -1077,15 +1000,6 @@ body[data-page="apply"] .page-hero {
   color: var(--forge-silver);
 }
 @media (max-width: 980px) {
-  .page-hero {
-    min-height: 360px;
-    padding: calc(var(--nav-h) + 56px) var(--pad-x) 64px;
-  }
-  .page-hero::after {
-    right: -80px;
-    width: 280px;
-    height: 280px;
-  }
   .auth-wrap,
   .dashboard-grid {
     grid-template-columns: 1fr;
@@ -1094,13 +1008,135 @@ body[data-page="apply"] .page-hero {
   }
   .auth-grid { grid-template-columns: 1fr; }
 }
-@media (max-width: 640px) {
-  .page-hero h1 {
-    max-width: none;
-    font-size: clamp(2.8rem, 14vw, 4.6rem);
-  }
-  .page-hero p {
-    font-size: 1rem;
-    line-height: 1.6;
-  }
+
+/* ══════════════════════════════════════════
+   RESOURCE VAULT — Lock/Unlock System
+══════════════════════════════════════════ */
+.resource-badge {
+  display: inline-block;
+  font-family: var(--font-mono); font-size: 0.52rem;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  padding: 3px 9px; margin-bottom: 14px;
+  border-radius: 2px;
+}
+.resource-badge.free {
+  background: rgba(0,204,102,0.1);
+  border: 1px solid rgba(0,204,102,0.3);
+  color: var(--energy-green);
+}
+.resource-badge.vault {
+  background: rgba(0,102,204,0.1);
+  border: 1px solid rgba(0,102,204,0.25);
+  color: var(--solar-light);
+}
+
+.resource-icon-wrap {
+  margin-bottom: 14px;
+  opacity: 0.9;
+}
+
+.resource-meta {
+  display: flex; gap: 14px; align-items: center;
+  margin-bottom: 16px;
+}
+.resource-filetype,
+.resource-updated {
+  font-family: var(--font-mono); font-size: 0.56rem;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--forge-smoke);
+}
+
+/* Vault lock state */
+.vault-card {
+  position: relative;
+  transition: transform 0.4s var(--ease-forge), box-shadow 0.4s, border-color 0.3s, opacity 0.4s;
+}
+.vault-lock-icon {
+  position: absolute; top: 16px; right: 16px;
+  font-size: 0.85rem; opacity: 0.5;
+  transition: all 0.3s;
+}
+.vault-card:not(.unlocked) {
+  opacity: 0.7;
+  border-color: rgba(255,255,255,0.03) !important;
+}
+.vault-card:not(.unlocked):hover {
+  opacity: 0.85;
+  transform: none !important;
+}
+.vault-card.unlocked {
+  border-color: rgba(0,204,102,0.12) !important;
+  opacity: 1;
+}
+.vault-card.unlocked:hover {
+  box-shadow: 0 20px 50px rgba(0,0,0,0.35);
+  border-color: rgba(0,204,102,0.22) !important;
+  transform: translateY(-4px);
+}
+.vault-card.unlocked .vault-lock-icon {
+  color: var(--energy-green);
+  opacity: 1;
+  font-size: 1rem;
+}
+.vault-card.unlocked::after {
+  background: linear-gradient(90deg, var(--energy-green), var(--solar-blue));
+}
+
+.vault-dl-wrap { margin-top: auto; }
+.vault-locked-label {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: var(--font-mono); font-size: 0.6rem;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--forge-smoke);
+}
+.vault-locked-label::before { content: '🔒'; font-size: 0.7rem; }
+
+/* Gate banner */
+.vault-gate-banner {
+  margin-top: 40px;
+  background: rgba(0,102,204,0.06);
+  border: 1px solid rgba(0,102,204,0.18);
+  border-left: 4px solid var(--solar-blue);
+  padding: 28px 32px;
+}
+.vault-gate-inner {
+  display: flex; align-items: center; gap: 24px; flex-wrap: wrap;
+}
+.vault-gate-icon {
+  font-size: 1.6rem; flex-shrink: 0;
+}
+.vault-gate-text {
+  flex: 1; min-width: 220px;
+}
+.vault-gate-text strong {
+  display: block;
+  font-family: var(--font-display); font-size: 1.15rem;
+  color: var(--forge-white); margin-bottom: 4px;
+}
+.vault-gate-text p {
+  font-size: 0.82rem; color: var(--forge-ash); line-height: 1.65;
+}
+.vault-gate-actions {
+  display: flex; gap: 12px; flex-wrap: wrap; flex-shrink: 0;
+}
+
+/* Vault apply CTA at bottom */
+.vault-apply-cta {
+  text-align: center;
+  margin-top: 60px;
+  padding-top: 56px;
+  border-top: 1px solid rgba(255,255,255,0.05);
+}
+
+/* Keep vault cards in grid */
+.vault-grid {
+  grid-template-columns: repeat(3, 1fr);
+  opacity: 1;
+  transition: opacity 0.5s;
+}
+
+@media (max-width: 980px) {
+  .vault-gate-inner { flex-direction: column; align-items: flex-start; }
+  .vault-gate-actions { width: 100%; }
+  .vault-grid { grid-template-columns: 1fr; }
 }

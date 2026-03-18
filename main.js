@@ -332,64 +332,143 @@ document.addEventListener('keydown', function(e) {
   if (e.key === 'Escape') closeExitPopup();
 });
 
-/* Supabase Auth placeholders for GitHub Pages */
-const SUPABASE_URL = 'https://YOUR_PROJECT.supabase.co';
+/* ══════════════════════════════════════════════════════════════
+   SUPABASE AUTH + RESOURCE GATING
+   ── Step 1: Create a free project at supabase.com
+   ── Step 2: Replace the two values below with yours
+   ── Step 3: In Supabase → Authentication → Users, create:
+              Email: tivi@tiviforge.com  |  Password: password
+   ══════════════════════════════════════════════════════════════ */
+const SUPABASE_URL     = 'https://YOUR_PROJECT_REF.supabase.co';
 const SUPABASE_ANON_KEY = 'YOUR_SUPABASE_ANON_KEY';
 
 let supabaseClient = null;
+
 function getSupabaseClient() {
   if (supabaseClient) return supabaseClient;
   if (!window.supabase || !window.supabase.createClient) return null;
-  if (SUPABASE_URL.includes('YOUR_PROJECT') || SUPABASE_ANON_KEY.includes('YOUR_SUPABASE')) return null;
-  supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+  if (SUPABASE_URL.includes('YOUR_PROJECT_REF') || SUPABASE_ANON_KEY.includes('YOUR_SUPABASE')) return null;
+  try {
+    supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+  } catch(e) { return null; }
   return supabaseClient;
 }
 
+/* ── Resource Vault Gating ───────────────────────────────── */
+function unlockVault(userEmail) {
+  /* Show auth status bar */
+  const bar = document.getElementById('resources-auth-bar');
+  const msg = document.getElementById('resources-auth-msg');
+  if (bar && msg) {
+    msg.textContent = '✓ Logged in as ' + userEmail + ' — full vault unlocked';
+    bar.style.display = 'block';
+  }
+
+  /* Hide the gate banner */
+  const gateBanner = document.getElementById('vault-gate-banner');
+  if (gateBanner) gateBanner.style.display = 'none';
+
+  /* Unlock every vault card */
+  document.querySelectorAll('.vault-card').forEach(card => {
+    card.classList.add('unlocked');
+
+    /* Swap lock icon → green check */
+    const lockIcon = card.querySelector('.vault-lock-icon');
+    if (lockIcon) lockIcon.textContent = '✓';
+
+    /* Show download link, hide locked label */
+    const lockedLabel = card.querySelector('.vault-locked-label');
+    const dlLink      = card.querySelector('.vault-dl-link');
+    if (lockedLabel) lockedLabel.style.display = 'none';
+    if (dlLink)      dlLink.style.display = 'inline-flex';
+  });
+
+  /* Update nav login button to show logout */
+  const navLoginBtn    = document.getElementById('nav-login-btn');
+  const mobileLoginBtn = document.getElementById('mobile-login-btn');
+  if (navLoginBtn)    { navLoginBtn.textContent = 'Logout'; navLoginBtn.href = '#'; navLoginBtn.onclick = () => { signOutUser(); return false; }; }
+  if (mobileLoginBtn) { mobileLoginBtn.textContent = 'Logout'; mobileLoginBtn.href = '#'; mobileLoginBtn.onclick = () => { signOutUser(); return false; }; }
+}
+
+function lockVault() {
+  /* Show apply CTA at the bottom */
+  const applyCtaEl = document.getElementById('vault-apply-cta');
+  if (applyCtaEl) applyCtaEl.style.display = 'block';
+}
+
+async function signOutUser() {
+  const client = getSupabaseClient();
+  if (client) await client.auth.signOut();
+  window.location.reload();
+}
+
+/* ── Auth Flow (login/signup/dashboard/resource pages) ───── */
 async function initAuthFlow() {
-  const page = document.body.dataset.page;
+  const page   = document.body.dataset.page;
   if (!page) return;
 
-  const client = getSupabaseClient();
+  const client     = getSupabaseClient();
   const authStatus = document.getElementById('auth-status');
 
+  /* ── Supabase not configured yet ── */
   if (!client) {
-    if (authStatus) authStatus.textContent = 'Set SUPABASE_URL and SUPABASE_ANON_KEY in assets/js/main.js to enable login.';
-    if (page === 'dashboard') {
-      window.location.href = 'login.html';
+    if (authStatus) {
+      authStatus.textContent = '⚙ Supabase not configured — set SUPABASE_URL and SUPABASE_ANON_KEY in assets/js/main.js.';
     }
+    if (page === 'dashboard') {
+      showToast('Supabase not configured. See setup guide.');
+    }
+    if (page === 'resources') lockVault();
     return;
   }
 
-  const { data: { session } } = await client.auth.getSession();
+  /* ── Get current session ── */
+  let session = null;
+  try {
+    const { data } = await client.auth.getSession();
+    session = data.session;
+  } catch(e) { session = null; }
 
+  /* ── Page-specific routing ── */
   if (page === 'dashboard' && !session) {
-    window.location.href = 'login.html';
-    return;
+    window.location.href = 'login.html'; return;
   }
-
   if (page === 'login' && session) {
-    window.location.href = 'dashboard.html';
-    return;
+    window.location.href = 'dashboard.html'; return;
   }
 
+  /* ── Dashboard: show email ── */
   if (page === 'dashboard' && session) {
-    const welcomeName = document.getElementById('dashboard-email');
-    if (welcomeName) welcomeName.textContent = session.user.email || 'Rep';
+    const welcomeEl = document.getElementById('dashboard-email');
+    if (welcomeEl) welcomeEl.textContent = session.user.email || 'Rep';
   }
 
-  const loginForm = document.getElementById('login-form');
+  /* ── Resources: gate/ungate vault ── */
+  if (page === 'resources') {
+    if (session) {
+      unlockVault(session.user.email);
+    } else {
+      lockVault();
+    }
+  }
+
+  /* ── Login page form handlers ── */
+  const loginForm  = document.getElementById('login-form');
   const signupForm = document.getElementById('signup-form');
-  const logoutBtn = document.getElementById('logoutBtn');
 
   if (loginForm) {
     loginForm.addEventListener('submit', async (e) => {
       e.preventDefault();
-      const email = document.getElementById('login-email').value.trim();
+      const email    = document.getElementById('login-email').value.trim();
       const password = document.getElementById('login-password').value;
+      const submitBtn = loginForm.querySelector('.auth-submit');
+      if (submitBtn) { submitBtn.textContent = 'Logging in…'; submitBtn.disabled = true; }
+
       const { error } = await client.auth.signInWithPassword({ email, password });
       if (error) {
-        showToast(error.message);
-        if (authStatus) authStatus.textContent = error.message;
+        showToast('Login failed: ' + error.message);
+        if (authStatus) authStatus.textContent = '✕ ' + error.message;
+        if (submitBtn) { submitBtn.textContent = 'Login'; submitBtn.disabled = false; }
         return;
       }
       window.location.href = 'dashboard.html';
@@ -399,18 +478,27 @@ async function initAuthFlow() {
   if (signupForm) {
     signupForm.addEventListener('submit', async (e) => {
       e.preventDefault();
-      const email = document.getElementById('signup-email').value.trim();
+      const email    = document.getElementById('signup-email').value.trim();
       const password = document.getElementById('signup-password').value;
+      const submitBtn = signupForm.querySelector('.auth-submit');
+      if (submitBtn) { submitBtn.textContent = 'Creating…'; submitBtn.disabled = true; }
+
       const { error } = await client.auth.signUp({ email, password });
       if (error) {
-        showToast(error.message);
-        if (authStatus) authStatus.textContent = error.message;
+        showToast('Sign up failed: ' + error.message);
+        if (authStatus) authStatus.textContent = '✕ ' + error.message;
+        if (submitBtn) { submitBtn.textContent = 'Create Account'; submitBtn.disabled = false; }
         return;
       }
-      showToast('Sign up successful. Check your email to confirm your account.');
-      if (authStatus) authStatus.textContent = 'Sign up successful. Check your email to confirm your account.';
+      showToast('Account created! Check your email to confirm, then log in.');
+      if (authStatus) authStatus.textContent = '✓ Account created — check email to confirm, then log in.';
+      if (submitBtn) { submitBtn.textContent = 'Create Account'; submitBtn.disabled = false; }
     });
   }
+
+  /* ── Logout button (dashboard nav) ── */
+  const logoutBtn       = document.getElementById('logoutBtn');
+  const logoutBtnMobile = document.getElementById('logoutBtnMobile');
 
   if (logoutBtn) {
     logoutBtn.addEventListener('click', async () => {
@@ -418,10 +506,24 @@ async function initAuthFlow() {
       window.location.href = 'login.html';
     });
   }
+  if (logoutBtnMobile) {
+    logoutBtnMobile.addEventListener('click', async () => {
+      await client.auth.signOut();
+      window.location.href = 'login.html';
+    });
+  }
 
+  /* ── Auth state listener (session expiry, etc.) ── */
   client.auth.onAuthStateChange((_event, updatedSession) => {
     if (page === 'dashboard' && !updatedSession) {
       window.location.href = 'login.html';
+    }
+    if (page === 'resources') {
+      if (updatedSession) {
+        unlockVault(updatedSession.user.email);
+      } else {
+        window.location.reload();
+      }
     }
   });
 }
