@@ -25,21 +25,8 @@
         #050507;
       color: #edf2f8;
       font-family: "Syne", sans-serif;
-      opacity: 0;
-      transition: opacity 0.18s ease;
     }
   </style>
-  <script>
-    (function () {
-      function revealPage() {
-        if (!document.body) return;
-        document.body.style.opacity = '1';
-      }
-      document.addEventListener('DOMContentLoaded', revealPage, { once: true });
-      window.addEventListener('load', revealPage, { once: true });
-      setTimeout(revealPage, 1200);
-    })();
-  </script>
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body data-page="resources">

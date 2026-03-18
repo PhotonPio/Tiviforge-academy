@@ -280,8 +280,25 @@ function submitBannerEmail(e) {
 }
 
 let exitShown = false;
+let exitIntentArmed = false;
+let hasInteractedOnPage = false;
+
+setTimeout(() => {
+  exitIntentArmed = true;
+}, 4000);
+
+document.addEventListener('mousemove', () => {
+  hasInteractedOnPage = true;
+}, { passive: true, once: true });
+
 document.addEventListener('mouseleave', function(e) {
-  if (e.clientY <= 0 && !exitShown && !sessionStorage.getItem('exitDismissed')) {
+  if (
+    e.clientY <= 0 &&
+    exitIntentArmed &&
+    hasInteractedOnPage &&
+    !exitShown &&
+    !sessionStorage.getItem('exitDismissed')
+  ) {
     exitShown = true;
     setTimeout(function() {
       const popup = document.getElementById('exit-popup');
