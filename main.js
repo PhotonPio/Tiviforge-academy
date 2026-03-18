@@ -279,38 +279,17 @@ function submitBannerEmail(e) {
   trackCTA('Banner PDF Submit', 'top_banner');
 }
 
-const ENABLE_EXIT_INTENT_POPUP = false;
 let exitShown = false;
-
-if (ENABLE_EXIT_INTENT_POPUP) {
-  let exitIntentArmed = false;
-  let hasInteractedOnPage = false;
-
-  setTimeout(() => {
-    exitIntentArmed = true;
-  }, 4000);
-
-  document.addEventListener('mousemove', () => {
-    hasInteractedOnPage = true;
-  }, { passive: true, once: true });
-
-  document.addEventListener('mouseleave', function(e) {
-    if (
-      e.clientY <= 0 &&
-      exitIntentArmed &&
-      hasInteractedOnPage &&
-      !exitShown &&
-      !sessionStorage.getItem('exitDismissed')
-    ) {
-      exitShown = true;
-      setTimeout(function() {
-        const popup = document.getElementById('exit-popup');
-        if (popup) popup.classList.add('show');
-        trackCTA('Exit Intent Shown', 'exit_popup');
-      }, 200);
-    }
-  });
-}
+document.addEventListener('mouseleave', function(e) {
+  if (e.clientY <= 0 && !exitShown && !sessionStorage.getItem('exitDismissed')) {
+    exitShown = true;
+    setTimeout(function() {
+      const popup = document.getElementById('exit-popup');
+      if (popup) popup.classList.add('show');
+      trackCTA('Exit Intent Shown', 'exit_popup');
+    }, 200);
+  }
+});
 
 function closeExitPopup() {
   const popup = document.getElementById('exit-popup');
@@ -360,8 +339,8 @@ document.addEventListener('keydown', function(e) {
    ── Step 3: In Supabase → Authentication → Users, create:
               Email: tivi@tiviforge.com  |  Password: password
    ══════════════════════════════════════════════════════════════ */
-const SUPABASE_URL     = 'https://YOUR_PROJECT_REF.supabase.co';
-const SUPABASE_ANON_KEY = 'YOUR_SUPABASE_ANON_KEY';
+const SUPABASE_URL     = 'https://kjeaaldcvrczakziwalp.supabase.co';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtqZWFhbGRjdnJjemFreml3YWxwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM4MTQxMTQsImV4cCI6MjA4OTM5MDExNH0.vWt0x6aerAEvt93JfhzUrOIz0kiI2bHCLwLKW6Dkq7A';
 
 let supabaseClient = null;
 
@@ -423,7 +402,8 @@ async function signOutUser() {
   window.location.reload();
 }
 
-/* ── Auth Flow (login/signup/dashboard/resource pages) ───── */async function initAuthFlow() {
+/* ── Auth Flow (login/signup/dashboard/resource pages) ───── */
+async function initAuthFlow() {
   const page   = document.body.dataset.page;
   if (!page) return;
 
@@ -433,7 +413,8 @@ async function signOutUser() {
   /* ── Supabase not configured yet ── */
   if (!client) {
     if (authStatus) {
-      authStatus.textContent = '⚙ Supabase not configured — set SUPABASE_URL and SUPABASE_ANON_KEY in assets/js/main.js.';    }
+      authStatus.textContent = '⚙ Supabase not configured — set SUPABASE_URL and SUPABASE_ANON_KEY in assets/js/main.js.';
+    }
     if (page === 'dashboard') {
       showToast('Supabase not configured. See setup guide.');
     }
@@ -447,6 +428,7 @@ async function signOutUser() {
     const { data } = await client.auth.getSession();
     session = data.session;
   } catch(e) { session = null; }
+
   /* ── Page-specific routing ── */
   if (page === 'dashboard' && !session) {
     window.location.href = 'login.html'; return;
@@ -533,7 +515,6 @@ async function signOutUser() {
 
   /* ── Auth state listener (session expiry, etc.) ── */
   client.auth.onAuthStateChange((_event, updatedSession) => {
-    initResourceVault(updatedSession);
     if (page === 'dashboard' && !updatedSession) {
       window.location.href = 'login.html';
     }
