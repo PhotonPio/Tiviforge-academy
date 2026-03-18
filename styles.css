@@ -839,11 +839,11 @@
        EXIT-INTENT POPUP
     ══════════════════════════════════════════ */
     #exit-popup {
-      display: none; position: fixed; inset: 0; z-index: 9000;
+      display: none !important; position: fixed; inset: 0; z-index: 9000;
       background: rgba(5,5,7,0.85); backdrop-filter: blur(12px);
       align-items: center; justify-content: center;
     }
-    #exit-popup.show { display: flex; }
+    #exit-popup.show { display: none !important; }
     .exit-popup-inner {
       background: var(--forge-charcoal);
       border: 1px solid rgba(0,102,204,0.2);

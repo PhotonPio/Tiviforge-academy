@@ -279,25 +279,34 @@ function submitBannerEmail(e) {
   trackCTA('Banner PDF Submit', 'top_banner');
 }
 
+const DISABLE_EXIT_INTENT_POPUP = true;
 let exitShown = false;
-document.addEventListener('mouseleave', function(e) {
-  if (e.clientY <= 0 && !exitShown && !sessionStorage.getItem('exitDismissed')) {
-    exitShown = true;
-    setTimeout(function() {
-      const popup = document.getElementById('exit-popup');
-      if (popup) popup.classList.add('show');
-      trackCTA('Exit Intent Shown', 'exit_popup');
-    }, 200);
-  }
-});
+
+if (DISABLE_EXIT_INTENT_POPUP) {
+  const popup = document.getElementById('exit-popup');
+  if (popup) popup.remove();
+} else {
+  document.addEventListener('mouseleave', function(e) {
+    if (e.clientY <= 0 && !exitShown && !sessionStorage.getItem('exitDismissed')) {
+      exitShown = true;
+      setTimeout(function() {
+        const popup = document.getElementById('exit-popup');
+        if (popup) popup.classList.add('show');
+        trackCTA('Exit Intent Shown', 'exit_popup');
+      }, 200);
+    }
+  });
+}
 
 function closeExitPopup() {
+  if (DISABLE_EXIT_INTENT_POPUP) return;
   const popup = document.getElementById('exit-popup');
   if (popup) popup.classList.remove('show');
   sessionStorage.setItem('exitDismissed', '1');
 }
 
 function submitExitEmail(e) {
+  if (DISABLE_EXIT_INTENT_POPUP) return;
   e.preventDefault();
   const exitEmailEl = document.getElementById('exit-email');
   if (!exitEmailEl) return;
@@ -322,14 +331,14 @@ function submitExitEmail(e) {
 }
 
 const exitPopup = document.getElementById('exit-popup');
-if (exitPopup) {
+if (exitPopup && !DISABLE_EXIT_INTENT_POPUP) {
   exitPopup.addEventListener('click', function(e) {
     if (e.target === this) closeExitPopup();
   });
 }
 
 document.addEventListener('keydown', function(e) {
-  if (e.key === 'Escape') closeExitPopup();
+  if (e.key === 'Escape' && !DISABLE_EXIT_INTENT_POPUP) closeExitPopup();
 });
 
 /* ══════════════════════════════════════════════════════════════
