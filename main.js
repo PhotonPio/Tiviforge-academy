@@ -279,34 +279,38 @@ function submitBannerEmail(e) {
   trackCTA('Banner PDF Submit', 'top_banner');
 }
 
+const ENABLE_EXIT_INTENT_POPUP = false;
 let exitShown = false;
-let exitIntentArmed = false;
-let hasInteractedOnPage = false;
 
-setTimeout(() => {
-  exitIntentArmed = true;
-}, 4000);
+if (ENABLE_EXIT_INTENT_POPUP) {
+  let exitIntentArmed = false;
+  let hasInteractedOnPage = false;
 
-document.addEventListener('mousemove', () => {
-  hasInteractedOnPage = true;
-}, { passive: true, once: true });
+  setTimeout(() => {
+    exitIntentArmed = true;
+  }, 4000);
 
-document.addEventListener('mouseleave', function(e) {
-  if (
-    e.clientY <= 0 &&
-    exitIntentArmed &&
-    hasInteractedOnPage &&
-    !exitShown &&
-    !sessionStorage.getItem('exitDismissed')
-  ) {
-    exitShown = true;
-    setTimeout(function() {
-      const popup = document.getElementById('exit-popup');
-      if (popup) popup.classList.add('show');
-      trackCTA('Exit Intent Shown', 'exit_popup');
-    }, 200);
-  }
-});
+  document.addEventListener('mousemove', () => {
+    hasInteractedOnPage = true;
+  }, { passive: true, once: true });
+
+  document.addEventListener('mouseleave', function(e) {
+    if (
+      e.clientY <= 0 &&
+      exitIntentArmed &&
+      hasInteractedOnPage &&
+      !exitShown &&
+      !sessionStorage.getItem('exitDismissed')
+    ) {
+      exitShown = true;
+      setTimeout(function() {
+        const popup = document.getElementById('exit-popup');
+        if (popup) popup.classList.add('show');
+        trackCTA('Exit Intent Shown', 'exit_popup');
+      }, 200);
+    }
+  });
+}
 
 function closeExitPopup() {
   const popup = document.getElementById('exit-popup');
