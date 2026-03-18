@@ -1,0 +1,176 @@
+<!-- TiviForge Multi-Page v2.1 — GitHub Pages Ready -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-TIVIFORGE02"></script>
+  <script>
+    (function(h,o,t,j,a,r){h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};h._hjSettings={hjid:3500001,hjsv:6};a=o.getElementsByTagName('head')[0];r=o.createElement('script');r.async=1;r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;a.appendChild(r);})(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Syne:wght@400;500;600;700;800&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/styles.css" />
+  <title>Rep Dashboard | TiviForge</title>
+  <meta name="description" content="Protected TiviForge rep dashboard." />
+</head>
+<body data-page="dashboard">
+<!-- Top Email Capture Banner -->
+<div id="top-banner">
+  <div class="top-banner-text">⚡ <strong>Free Download:</strong> The $2.90/W Redline Commission Calculator PDF</div>
+  <form class="top-banner-form" onsubmit="submitBannerEmail(event)">
+    <input type="email" class="top-banner-input" id="banner-email" placeholder="your@email.com" required>
+    <button type="submit" class="top-banner-btn">Send Me the PDF →</button>
+  </form>
+  <button class="top-banner-close" onclick="document.getElementById('top-banner').style.display='none'" aria-label="Close banner">✕</button>
+</div>
+
+<!-- Exit-Intent Popup -->
+<div id="exit-popup" role="dialog" aria-modal="true">
+  <div class="exit-popup-inner">
+    <button class="exit-popup-close" onclick="closeExitPopup()" aria-label="Close">✕</button>
+    <div class="exit-popup-eyebrow">Wait — Free Calculator PDF</div>
+    <h2 class="exit-popup-title">Get the <em>$2.90/W Redline</em><br>Commission Calculator PDF</h2>
+    <p class="exit-popup-sub">The exact tool TiviForge reps use to calculate their take-home before every deal — with adder deductions, battery commissions, and the full deal breakdown. Free, instant download.</p>
+    <form class="exit-popup-form" onsubmit="submitExitEmail(event)">
+      <input type="email" id="exit-email" placeholder="your@email.com" required>
+      <button type="submit">Send It →</button>
+    </form>
+    <div class="exit-popup-disclaimer">No spam. Instant delivery. Unsubscribe anytime.</div>
+  </div>
+</div>
+
+<!-- Custom Cursor -->
+<div id="cursor-ring"></div>
+<div id="cursor-dot"></div>
+
+<!-- Progress Bar -->
+<div id="progress"></div>
+
+<!-- Toast -->
+<div id="toast"></div>
+<nav id="nav">
+  <a href="index.html" class="nav-logo"><div class="solar-mark">☀</div><span><span class="t">T</span>iviForge</span></a>
+  <ul class="nav-links">
+    <li><a href="dashboard.html">Dashboard</a></li>
+    <li><a href="academy.html">Academy</a></li>
+    <li><a href="calculators.html">Calculators</a></li>
+    <li><a href="resources.html">Resources</a></li>
+    <li><a href="about.html">About</a></li>
+  </ul>
+  <button id="logoutBtn" class="nav-cta">Logout</button>
+  <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="dashboard.html" onclick="closeMobile()">Dashboard</a>
+  <a href="academy.html" onclick="closeMobile()">Training Academy</a>
+  <a href="calculators.html" onclick="closeMobile()">Calculators</a>
+  <a href="resources.html" onclick="closeMobile()">Resources</a>
+  <a href="about.html" onclick="closeMobile()">About & Legal</a>
+  <button id="logoutBtnMobile" class="nav-cta" onclick="document.getElementById('logoutBtn').click();">Logout</button>
+</div>
+<section class="page-hero">
+  <div class="eyebrow green">Rep Dashboard</div>
+  <h1>Welcome, <em id="dashboard-email">Rep</em></h1>
+  <p>Your private TiviForge command center for modules, resources, and coaching.</p>
+</section>
+<section class="dashboard-grid">
+  <article class="dashboard-card" data-aos="fade-up">
+    <h3>Unlocked Modules</h3>
+    <ul class="dashboard-list">
+      <li>01 Reading California Energy Bills</li>
+      <li>02 NEM 3.0 / Net Billing Deep Dive</li>
+      <li>03 Battery Mastery & SGIP</li>
+      <li>04 Aurora Solar Mastery</li>
+      <li>05 Compliance & CSLB HIS</li>
+      <li>06 Utility Deep-Dives</li>
+      <li>07 Closing Scripts & Adder Strategy</li>
+    </ul>
+  </article>
+  <article class="dashboard-card" data-aos="fade-up" data-aos-delay="80">
+    <h3>Private Resource Vault</h3>
+    <ul class="dashboard-list">
+      <li>HIS Registration Guide (PDF)</li>
+      <li>NEM 3.0 2026 Summary (PDF)</li>
+      <li>Utility Rate Sheets (Quarterly)</li>
+      <li>Title 24 Permitting Checklist</li>
+    </ul>
+  </article>
+  <article class="dashboard-card" data-aos="fade-up" data-aos-delay="120">
+    <h3>Calculator History</h3>
+    <p class="subtext">History sync placeholder. Connect to Supabase table to persist rep calculations.</p>
+  </article>
+  <article class="dashboard-card" data-aos="fade-up" data-aos-delay="160">
+    <h3>AI Solar Coach</h3>
+    <p class="subtext">Use the floating coach widget for full NEM 3.0, Aurora, battery, and compliance support.</p>
+    <a class="btn-primary" href="javascript:toggleCoach()">Open AI Coach →</a>
+  </article>
+</section>
+<!-- ════════════════════════════════════════════
+     FOOTER
+════════════════════════════════════════════ -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-copy">
+      © 2026 TiviForge Solar Rep Academy<br>
+      Authorized Axia by Qcells Sales Partner · California · academy@tiviforge.com
+    </div>
+    <div class="footer-links">
+      <a href="about.html">Disclaimers</a>
+      <a href="https://www.cslb.ca.gov" target="_blank" rel="noopener">CSLB.gov</a>
+      <a href="mailto:academy@tiviforge.com">Contact</a>
+      <a href="apply.html">Apply Now</a>
+    </div>
+  </div>
+</footer>
+<!-- ════════════════════════════════════════════
+     AI SOLAR COACH WIDGET
+     SYSTEM PROMPT (kept in code for reference):
+     "You are the official TiviForge Solar Expert AI Coach
+     for 1099 California solar sales representatives.
+     Always base answers only on the transparent $2.90/W
+     redline. Never mention owner override or higher margins.
+     Be knowledgeable on Aurora Solar, all CA utilities,
+     NEM 3.0/Net Billing Tariff 2026 avoided-cost export
+     rates (~$0.05–$0.08/kWh), battery systems & SGIP,
+     energy bill reading, CSLB HIS registration, Solar
+     Disclosure Document, Title 24, HSSA rescission rights,
+     and compliant sales practices."
+════════════════════════════════════════════ -->
+<div id="coach-widget">
+  <div id="coach-panel">
+    <div class="coach-header">
+      <div class="coach-avatar">☀</div>
+      <div class="coach-info">
+        <h4>Solar Coach AI</h4>
+        <span>● Online · TiviForge Academy</span>
+      </div>
+      <button class="coach-close" onclick="toggleCoach()">✕</button>
+    </div>
+    <div id="coachMessages"></div>
+    <div class="coach-quick-asks" id="quickAsks">
+      <button class="quick-btn" onclick="askCoach(this.textContent)">NEM 3.0 rates?</button>
+      <button class="quick-btn" onclick="askCoach(this.textContent)">How to get HIS?</button>
+      <button class="quick-btn" onclick="askCoach(this.textContent)">Battery sizing help</button>
+      <button class="quick-btn" onclick="askCoach(this.textContent)">Aurora sub-account?</button>
+      <button class="quick-btn" onclick="askCoach(this.textContent)">SGIP incentives 2026?</button>
+    </div>
+    <div class="coach-input-row">
+      <input type="text" id="coachInput" placeholder="Ask anything about solar, Aurora, NEM 3.0…" />
+      <button id="coachSend" onclick="sendCoachMessage()">→</button>
+    </div>
+  </div>
+  <button id="coach-toggle" onclick="toggleCoach()" aria-label="Open Solar Coach">
+    <div class="coach-pulse"></div>
+    <div class="coach-icon">☀</div>
+    <div class="coach-badge">AI</div>
+  </button>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="assets/js/main.js"></script>
+<script src="assets/js/coach.js"></script>
+</body>
+</html>
