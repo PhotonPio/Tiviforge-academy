@@ -12,6 +12,20 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Syne:wght@400;500;600;700;800&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet" />
   <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet" />
+  <link rel="preload" href="styles.css" as="style" />
+  <style>
+    html { background: #050507; }
+    body {
+      margin: 0;
+      background:
+        radial-gradient(ellipse 54% 50% at 80% 24%, rgba(0,102,204,0.18) 0%, transparent 66%),
+        radial-gradient(ellipse 34% 32% at 22% 74%, rgba(0,204,102,0.12) 0%, transparent 58%),
+        #050507;
+      color: #edf2f8;
+      font-family: "Syne", sans-serif;
+      visibility: hidden;
+    }
+  </style>
   <link rel="stylesheet" href="styles.css" />
   <title>Resource Library | TiviForge</title>
   <meta name="description" content="Resource library with compliance and utility guides." />
@@ -188,6 +202,7 @@
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>window.addEventListener('load', () => { document.body.style.visibility = 'visible'; });</script>
 <script src="main.js"></script>
 <script src="coach.js"></script>
 </body>
