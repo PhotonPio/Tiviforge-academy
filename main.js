@@ -1,5 +1,3 @@
-<!-- TiviForge Multi-Page v2.1 — GitHub Pages Ready -->
-
 window.dataLayer = window.dataLayer || [];
 function gtag(){dataLayer.push(arguments);}
 if (typeof window.gtag !== 'function') {
