@@ -1,0 +1,360 @@
+<!-- TiviForge Multi-Page v2.1 — GitHub Pages Ready -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-TIVIFORGE02"></script>
+  <script>
+    (function(h,o,t,j,a,r){h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};h._hjSettings={hjid:3500001,hjsv:6};a=o.getElementsByTagName('head')[0];r=o.createElement('script');r.async=1;r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;a.appendChild(r);})(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Syne:wght@400;500;600;700;800&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/styles.css" />
+  <title>TiviForge Solar Rep Academy | $2.90/W Redline · 1099 Solar Sales Training California 2026</title>
+  <meta name="description" content="Marketing landing page for TiviForge Solar Rep Academy." />
+</head>
+<body data-page="index">
+<!-- Top Email Capture Banner -->
+<div id="top-banner">
+  <div class="top-banner-text">⚡ <strong>Free Download:</strong> The $2.90/W Redline Commission Calculator PDF</div>
+  <form class="top-banner-form" onsubmit="submitBannerEmail(event)">
+    <input type="email" class="top-banner-input" id="banner-email" placeholder="your@email.com" required>
+    <button type="submit" class="top-banner-btn">Send Me the PDF →</button>
+  </form>
+  <button class="top-banner-close" onclick="document.getElementById('top-banner').style.display='none'" aria-label="Close banner">✕</button>
+</div>
+
+<!-- Exit-Intent Popup -->
+<div id="exit-popup" role="dialog" aria-modal="true">
+  <div class="exit-popup-inner">
+    <button class="exit-popup-close" onclick="closeExitPopup()" aria-label="Close">✕</button>
+    <div class="exit-popup-eyebrow">Wait — Free Calculator PDF</div>
+    <h2 class="exit-popup-title">Get the <em>$2.90/W Redline</em><br>Commission Calculator PDF</h2>
+    <p class="exit-popup-sub">The exact tool TiviForge reps use to calculate their take-home before every deal — with adder deductions, battery commissions, and the full deal breakdown. Free, instant download.</p>
+    <form class="exit-popup-form" onsubmit="submitExitEmail(event)">
+      <input type="email" id="exit-email" placeholder="your@email.com" required>
+      <button type="submit">Send It →</button>
+    </form>
+    <div class="exit-popup-disclaimer">No spam. Instant delivery. Unsubscribe anytime.</div>
+  </div>
+</div>
+
+<!-- Custom Cursor -->
+<div id="cursor-ring"></div>
+<div id="cursor-dot"></div>
+
+<!-- Progress Bar -->
+<div id="progress"></div>
+
+<!-- Toast -->
+<div id="toast"></div>
+<nav id="nav">
+  <a href="index.html" class="nav-logo"><div class="solar-mark">☀</div><span><span class="t">T</span>iviForge</span></a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="academy.html">Academy</a></li>
+    <li><a href="calculators.html">Calculators</a></li>
+    <li><a href="resources.html">Resources</a></li>
+    <li><a href="apply.html">Apply</a></li>
+    <li><a href="about.html">About</a></li>
+  </ul>
+  <a href="login.html" class="nav-cta" onclick="trackCTA('Rep Login', 'nav')">Rep Login</a>
+  <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html" onclick="closeMobile()">Home</a>
+  <a href="academy.html" onclick="closeMobile()">Training Academy</a>
+  <a href="calculators.html" onclick="closeMobile()">Calculators</a>
+  <a href="resources.html" onclick="closeMobile()">Resources</a>
+  <a href="about.html" onclick="closeMobile()">About & Legal</a>
+  <a href="apply.html" onclick="closeMobile()">Apply</a>
+  <a href="login.html" class="nav-cta" onclick="closeMobile(); trackCTA('Mobile Rep Login', 'mobile_nav')">Rep Login →</a>
+</div>
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-bg-img"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-orb"></div>
+  <div class="hero-orb-ring"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">California 1099 Solar Rep Academy · Est. 2026</div>
+    <h1 class="hero-h1">
+      Become Your<br>
+      <em>Own Boss</em>
+      in California Solar
+    </h1>
+    <p class="hero-pitch">
+      A transparent <strong>$2.90/W redline</strong>. Your own Aurora Solar credentials. Training that actually teaches you how solar works.
+      Most reps have no idea what they're worth — you will.
+    </p>
+    <div class="hero-ctas">
+      <a href="apply.html" class="btn-primary green" onclick="trackCTA('Hero Apply', 'hero')">Apply as a 1099 Rep →</a>
+      <a href="calculators.html" class="btn-secondary" onclick="trackCTA('Hero Calculator', 'hero')">Run Commission Calculator</a>
+    </div>
+    <div class="hero-proof">
+      <div class="proof-item">
+        <div class="proof-num">$2<span>.90</span></div>
+        <div class="proof-label">Per Watt Redline · Transparent</div>
+      </div>
+      <div class="proof-item">
+        <div class="proof-num">7<span>+</span></div>
+        <div class="proof-label">Training Modules · Deep Dive</div>
+      </div>
+      <div class="proof-item">
+        <div class="proof-num">24<span>/7</span></div>
+        <div class="proof-label">AI Solar Coach · Always On</div>
+      </div>
+      <div class="proof-item">
+        <div class="proof-num">0<span>%</span></div>
+        <div class="proof-label">Hidden Markups · Real Numbers</div>
+      </div>
+    </div>
+  </div>
+  <div class="scroll-hint">
+    <div class="scroll-line"></div>
+    Scroll to explore
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ════════════════════════════════════════════
+     TRUST / COMPLIANCE BAR
+════════════════════════════════════════════ -->
+<div id="trust-bar">
+  <div class="trust-bar-inner">
+    <div class="trust-bar-label">Compliance & Partners</div>
+    <div class="trust-items">
+      <div class="trust-item"><div class="trust-dot"></div>CSLB HIS Guidance Provided</div>
+      <div class="trust-item"><div class="trust-dot"></div>Axia by Qcells Partner</div>
+      <div class="trust-item"><div class="trust-dot"></div>All Designs by Licensed Team</div>
+      <div class="trust-item"><div class="trust-dot"></div>Solar Disclosure Compliant</div>
+      <div class="trust-item"><div class="trust-dot"></div>NEM 3.0 Current · 2026</div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════
+     OPPORTUNITY
+════════════════════════════════════════════ -->
+<section id="opportunity" data-aos="fade-up">
+  <div class="eyebrow">The 1099 Opportunity</div>
+  <h2 class="headline">Most Reps Don't Know<br>Their <em>Redline</em></h2>
+  <p class="subtext">Thousands of California solar salespeople are working for companies that hide pricing, inflate redlines above $3.00/W, and leave them unable to compete on adders or batteries. That ends here.</p>
+
+  <div class="opp-grid">
+    <div>
+      <ul class="opp-bullets">
+        <li class="opp-bullet" data-aos="fade-right" data-aos-delay="0">
+          <div class="opp-bullet-icon">💡</div>
+          <div>
+            <h4>Transparent $2.90/W Redline</h4>
+            <p>You know exactly what you're selling from. No inflated "dealer fees" buried in the numbers. Close more deals, keep more money, and compete against anyone.</p>
+          </div>
+        </li>
+        <li class="opp-bullet" data-aos="fade-right" data-aos-delay="80">
+          <div class="opp-bullet-icon">🖥</div>
+          <div>
+            <h4>Your Own Aurora Solar Sub-Account</h4>
+            <p>Design professional proposals under our Axia by Qcells partnership. Full site modeling, sales mode proposals, and your own login — not a shared screen with your manager watching.</p>
+          </div>
+        </li>
+        <li class="opp-bullet" data-aos="fade-right" data-aos-delay="160">
+          <div class="opp-bullet-icon">🎓</div>
+          <div>
+            <h4>Deep Training — Not Just Scripts</h4>
+            <p>Energy bill analysis, NEM 3.0 export rates, battery sizing, SGIP incentives, every California utility, codes, compliance, and closing. The education most companies refuse to give.</p>
+          </div>
+        </li>
+        <li class="opp-bullet" data-aos="fade-right" data-aos-delay="240">
+          <div class="opp-bullet-icon">⚖️</div>
+          <div>
+            <h4>Full 1099 Independence</h4>
+            <p>California law allows 1099 solar salespeople with valid CSLB HIS registration. We guide you through the process. No territory restrictions, no cap, no office politics.</p>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <div data-aos="fade-left">
+      <div class="eyebrow green" style="margin-bottom: 28px;">Side by Side Comparison</div>
+      <div class="comp-table-wrap">
+        <table class="comp-table">
+          <thead>
+            <tr>
+              <th>Feature</th>
+              <th>Typical Big Company Rep</th>
+              <th>TiviForge 1099 Rep</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Redline Knowledge</td>
+              <td class="col-bad">Hidden / Often $3.10–3.50+</td>
+              <td class="col-good">Transparent $2.90/W</td>
+            </tr>
+            <tr>
+              <td>Aurora Access</td>
+              <td class="col-bad">Shared login or none</td>
+              <td class="col-good">Your own sub-account</td>
+            </tr>
+            <tr>
+              <td>Battery Pricing</td>
+              <td class="col-bad">Rarely taught, buried</td>
+              <td class="col-good">Full calculator + training</td>
+            </tr>
+            <tr>
+              <td>NEM 3.0 Depth</td>
+              <td class="col-bad">Script only, no analysis</td>
+              <td class="col-good">Export rates, TOU, payback</td>
+            </tr>
+            <tr>
+              <td>CSLB Compliance</td>
+              <td class="col-bad">Left to figure out alone</td>
+              <td class="col-good">Step-by-step HIS guidance</td>
+            </tr>
+            <tr>
+              <td>Commission Transparency</td>
+              <td class="col-bad">Vague split, no formula</td>
+              <td class="col-good">Real-time calculator yours</td>
+            </tr>
+            <tr>
+              <td>Territory</td>
+              <td class="col-bad">Restricted or managed</td>
+              <td class="col-good">All of California, 1099</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div style="margin-top: 36px;">
+        <a href="apply.html" class="btn-primary" onclick="trackCTA('Opp Apply', 'opportunity')">Apply Now — Start This Week →</a>
+      </div>
+    </div>
+  </div>
+</section>
+<div class="divider"></div>
+<section id="testimonials" data-aos="fade-up">
+  <div class="eyebrow">Rep Experiences</div>
+  <h2 class="headline">What Changes When<br>You <em>Know</em> Your Numbers</h2>
+  <div class="testimonials-grid">
+    <div class="testi-card" data-aos="fade-up" data-aos-delay="0">
+      <div class="testi-mark">"</div>
+      <div class="testi-stars">★★★★★</div>
+      <div class="testi-text">I spent two years thinking $3.40/W was a good redline. The commission calculator showed me I was leaving $1,800–$2,500 on every deal. Knowing the actual number changed everything.</div>
+      <div class="testi-author">
+        <div class="testi-avatar"><img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=88&h=88&fit=crop&auto=format&q=70" alt="Marcus R." loading="lazy"></div>
+        <div>
+          <div class="testi-name">Marcus R.</div>
+          <div class="testi-role">1099 Rep · SoCal Edison Territory</div>
+        </div>
+      </div>
+    </div>
+    <div class="testi-card" data-aos="fade-up" data-aos-delay="80">
+      <div class="testi-mark">"</div>
+      <div class="testi-stars">★★★★★</div>
+      <div class="testi-text">The battery module alone was worth everything. I went from never selling batteries to closing a battery on 6 out of my last 8 deals. The NEM 3.0 explanation is airtight — customers actually get it.</div>
+      <div class="testi-author">
+        <div class="testi-avatar"><img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=88&h=88&fit=crop&auto=format&q=70" alt="Jessica S." loading="lazy"></div>
+        <div>
+          <div class="testi-name">Jessica S.</div>
+          <div class="testi-role">1099 Rep · PG&E Territory, Fresno</div>
+        </div>
+      </div>
+    </div>
+    <div class="testi-card" data-aos="fade-up" data-aos-delay="160">
+      <div class="testi-mark">"</div>
+      <div class="testi-stars">★★★★★</div>
+      <div class="testi-text">Having my own Aurora credentials changed how customers see me. I pull up their design on the spot, run the savings analysis live, and I'm no longer waiting on some manager to send a proposal three days later.</div>
+      <div class="testi-author">
+        <div class="testi-avatar"><img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=88&h=88&fit=crop&auto=format&q=70" alt="Daniel L." loading="lazy"></div>
+        <div>
+          <div class="testi-name">Daniel L.</div>
+          <div class="testi-role">1099 Rep · SDG&E Territory, San Diego</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section id="final-cta">
+  <div class="final-cta-bg"></div>
+  <div class="content" data-aos="fade-up">
+    <div class="eyebrow" style="justify-content: center;">Your Move</div>
+    <h2>Stop Selling Blind.<br><em>Know Your Numbers.</em></h2>
+    <p>Join California's most transparent 1099 solar academy. Real redline. Real training. Real Aurora credentials. The only thing left is your decision.</p>
+    <div class="final-ctas">
+      <a href="apply.html" class="btn-primary green" onclick="trackCTA('Final CTA Apply', 'final_cta')">Apply as a 1099 Rep →</a>
+      <a href="calculators.html" class="btn-secondary" onclick="trackCTA('Final CTA Calc', 'final_cta')">Run the Commission Calculator</a>
+    </div>
+    <p style="margin-top: 36px; font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--forge-smoke);">
+      CSLB Compliant · Axia by Qcells Partner · NEM 3.0 Current 2026
+    </p>
+  </div>
+</section>
+<!-- ════════════════════════════════════════════
+     FOOTER
+════════════════════════════════════════════ -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-copy">
+      © 2026 TiviForge Solar Rep Academy<br>
+      Authorized Axia by Qcells Sales Partner · California · academy@tiviforge.com
+    </div>
+    <div class="footer-links">
+      <a href="about.html">Disclaimers</a>
+      <a href="https://www.cslb.ca.gov" target="_blank" rel="noopener">CSLB.gov</a>
+      <a href="mailto:academy@tiviforge.com">Contact</a>
+      <a href="apply.html">Apply Now</a>
+    </div>
+  </div>
+</footer>
+<!-- ════════════════════════════════════════════
+     AI SOLAR COACH WIDGET
+     SYSTEM PROMPT (kept in code for reference):
+     "You are the official TiviForge Solar Expert AI Coach
+     for 1099 California solar sales representatives.
+     Always base answers only on the transparent $2.90/W
+     redline. Never mention owner override or higher margins.
+     Be knowledgeable on Aurora Solar, all CA utilities,
+     NEM 3.0/Net Billing Tariff 2026 avoided-cost export
+     rates (~$0.05–$0.08/kWh), battery systems & SGIP,
+     energy bill reading, CSLB HIS registration, Solar
+     Disclosure Document, Title 24, HSSA rescission rights,
+     and compliant sales practices."
+════════════════════════════════════════════ -->
+<div id="coach-widget">
+  <div id="coach-panel">
+    <div class="coach-header">
+      <div class="coach-avatar">☀</div>
+      <div class="coach-info">
+        <h4>Solar Coach AI</h4>
+        <span>● Online · TiviForge Academy</span>
+      </div>
+      <button class="coach-close" onclick="toggleCoach()">✕</button>
+    </div>
+    <div id="coachMessages"></div>
+    <div class="coach-quick-asks" id="quickAsks">
+      <button class="quick-btn" onclick="askCoach(this.textContent)">NEM 3.0 rates?</button>
+      <button class="quick-btn" onclick="askCoach(this.textContent)">How to get HIS?</button>
+      <button class="quick-btn" onclick="askCoach(this.textContent)">Battery sizing help</button>
+      <button class="quick-btn" onclick="askCoach(this.textContent)">Aurora sub-account?</button>
+      <button class="quick-btn" onclick="askCoach(this.textContent)">SGIP incentives 2026?</button>
+    </div>
+    <div class="coach-input-row">
+      <input type="text" id="coachInput" placeholder="Ask anything about solar, Aurora, NEM 3.0…" />
+      <button id="coachSend" onclick="sendCoachMessage()">→</button>
+    </div>
+  </div>
+  <button id="coach-toggle" onclick="toggleCoach()" aria-label="Open Solar Coach">
+    <div class="coach-pulse"></div>
+    <div class="coach-icon">☀</div>
+    <div class="coach-badge">AI</div>
+  </button>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="assets/js/main.js"></script>
+<script src="assets/js/coach.js"></script>
+</body>
+</html>
