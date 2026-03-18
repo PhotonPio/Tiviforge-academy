@@ -1,4 +1,4 @@
-<!-- TiviForge Multi-Page v2.1 — GitHub Pages Ready -->
+<!-- TiviForge Multi-Page v2.2 — GitHub Pages Ready -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,7 +12,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Syne:wght@400;500;600;700;800&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet" />
   <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet" />
-  <link rel="preload" href="styles.css?v=20260318b" as="style" />
+  <link rel="preload" href="styles.css?v=20260318c" as="style" />
   <style>
     html { background: #050507; }
     body {
@@ -26,11 +26,12 @@
       visibility: hidden;
     }
   </style>
-  <link rel="stylesheet" href="styles.css?v=20260318b" />
+  <link rel="stylesheet" href="styles.css?v=20260318c" />
   <title>Solar Calculators | TiviForge</title>
-  <meta name="description" content="Commission and battery calculators for California solar reps." />
+  <meta name="description" content="Commission and Tesla Powerwall 3 battery calculators for California solar reps. Real-time numbers built on the $2.90/W redline." />
 </head>
 <body data-page="calculators">
+
 <!-- Top Email Capture Banner -->
 <div id="top-banner">
   <div class="top-banner-text">⚡ <strong>Free Download:</strong> The $2.90/W Redline Commission Calculator PDF</div>
@@ -38,7 +39,7 @@
     <input type="email" class="top-banner-input" id="banner-email" placeholder="your@email.com" required>
     <button type="submit" class="top-banner-btn">Send Me the PDF →</button>
   </form>
-  <button class="top-banner-close" onclick="document.getElementById('top-banner').style.display='none'" aria-label="Close banner">✕</button>
+  <button class="top-banner-close" aria-label="Close banner">✕</button>
 </div>
 
 <!-- Exit-Intent Popup -->
@@ -59,12 +60,11 @@
 <!-- Custom Cursor -->
 <div id="cursor-ring"></div>
 <div id="cursor-dot"></div>
-
 <!-- Progress Bar -->
 <div id="progress"></div>
-
 <!-- Toast -->
 <div id="toast"></div>
+
 <nav id="nav">
   <a href="index.html" class="nav-logo"><div class="solar-mark">☀</div><span><span class="t">T</span>iviForge</span></a>
   <ul class="nav-links">
@@ -83,108 +83,146 @@
   <a href="academy.html" onclick="closeMobile()">Training Academy</a>
   <a href="calculators.html" onclick="closeMobile()">Calculators</a>
   <a href="resources.html" onclick="closeMobile()">Resources</a>
-  <a href="about.html" onclick="closeMobile()">About & Legal</a>
+  <a href="about.html" onclick="closeMobile()">About &amp; Legal</a>
   <a href="apply.html" onclick="closeMobile()">Apply</a>
   <a href="login.html" class="nav-cta" onclick="closeMobile(); trackCTA('Mobile Rep Login', 'mobile_nav')">Rep Login →</a>
 </div>
+
 <main class="page-shell">
-<section class="page-hero"><div class="eyebrow green">Real-Time Tools</div><h1>Calculator Suite</h1><p>Commission and battery logic using the latest adders as dollar-for-dollar deductions model.</p></section>
+<section class="page-hero">
+  <div class="eyebrow green">Real-Time Tools</div>
+  <h1>Calculator Suite</h1>
+  <p>Commission and Tesla Powerwall 3 battery logic — built on the $2.90/W redline. Know your numbers before every knock.</p>
+</section>
+
 <section id="calculators">
   <div data-aos="fade-up">
     <div class="eyebrow green">Real-Time Tools</div>
     <h2 class="headline">Know Your Numbers<br><em>Before</em> Every Deal</h2>
-    <p class="subtext" style="margin-bottom: 40px;">Real-time calculators built around the $2.90/W redline. Run scenarios, price adders, and know exactly what you earn before you leave the driveway.</p>
+    <p class="subtext" style="margin-bottom: 40px;">Real-time calculators built around the $2.90/W redline. Price adders, stack Powerwall 3 units, and know exactly what you earn before you leave the driveway.</p>
   </div>
 
   <div class="calc-tabs">
     <button class="calc-tab active" onclick="switchTab('commission')">Commission Calculator</button>
-    <button class="calc-tab" onclick="switchTab('battery')">Battery &amp; NEM 3.0 Calculator</button>
+    <button class="calc-tab" onclick="switchTab('battery')">Tesla Powerwall 3 Calculator</button>
   </div>
 
-  <!-- Commission Calculator -->
+  <!-- ══════════════════════════════════
+       COMMISSION CALCULATOR
+  ══════════════════════════════════ -->
   <div class="calc-panel active" id="tab-commission">
     <div class="calc-grid" data-aos="fade-up">
+
       <div class="calc-form-box">
         <div class="calc-form-title">Commission Calculator</div>
-        <div class="calc-form-sub">Enter deal parameters to see your real earnings. Redline locked at $2.90/W per academy terms.</div>
+        <div class="calc-form-sub">Enter deal parameters. Redline locked at $2.90/W per academy terms.</div>
 
         <div class="form-field">
           <label class="form-label">System Size (kW)</label>
           <input type="number" class="form-input" id="cc-kw" value="8" min="1" max="50" step="0.5" oninput="calcCommission()">
         </div>
+
         <div class="form-field">
-          <label class="form-label">Base Sold Price ($/W) · Your ask price</label>
-          <input type="number" class="form-input" id="cc-ppw" value="4.50" min="2.91" max="7" step="0.01" oninput="calcCommission()">
+          <label class="form-label">Sold Price ($/W) — your ask price</label>
+          <input type="number" class="form-input" id="cc-ppw" value="4.50" min="2.91" max="7.00" step="0.01" oninput="calcCommission()">
         </div>
+
         <div class="calc-input-row">
           <div class="form-field">
             <label class="form-label">Battery Adder ($)</label>
             <input type="number" class="form-input" id="cc-batt" value="0" min="0" step="500" oninput="calcCommission()">
           </div>
           <div class="form-field">
-            <label class="form-label">Roof/Structural Adder ($)</label>
+            <label class="form-label">Roof / Structural ($)</label>
             <input type="number" class="form-input" id="cc-roof" value="0" min="0" step="500" oninput="calcCommission()">
           </div>
         </div>
+
         <div class="form-field">
           <label class="form-label">Other Adders ($)</label>
           <input type="number" class="form-input" id="cc-other" value="0" min="0" step="100" oninput="calcCommission()">
         </div>
+
         <div class="form-field">
           <label class="form-label">Your Commission Split (%)</label>
           <input type="number" class="form-input" id="cc-split" value="50" min="10" max="90" step="5" oninput="calcCommission()">
         </div>
+
         <div class="calc-disclaimer">
           For training and estimation only. Redline fixed at $2.90/W per academy terms. Final pricing reviewed by licensed Axia partner team. Earnings not guaranteed.
         </div>
-      </div>
+      </div><!-- /calc-form-box -->
 
       <div class="calc-results">
         <div class="result-eyebrow">Deal Breakdown · Live</div>
+
         <div class="result-item">
           <div class="result-label">Total Contract Price</div>
           <div class="result-value" id="r-total">$36,000</div>
-          <div class="result-sub" id="r-total-sub">8.0 kW × $4.50 + $0 adders</div>
+          <div class="result-sub" id="r-total-sub">8.0 kW × $4.50/W + $0 adders</div>
         </div>
+
         <div class="result-item">
           <div class="result-label">Redline Cost (Locked $2.90/W)</div>
           <div class="result-value" id="r-redline">$23,200</div>
-          <div class="result-sub">8.0 kW × $2.90/W</div>
+          <div class="result-sub" id="r-redline-sub">8.0 kW × $2.90/W</div>
         </div>
+
         <div class="result-item">
-          <div class="result-label">Gross Margin Available</div>
+          <div class="result-label">Gross Margin ($/W Spread Only)</div>
           <div class="result-value" id="r-margin">$12,800</div>
-          <div class="result-sub" id="r-margin-sub">Contract − Redline</div>
+          <div class="result-sub" id="r-margin-sub">($4.50 − $2.90) × 8,000 W</div>
         </div>
+
         <div class="result-item highlight">
           <div class="result-label">🟢 Your Potential Earnings This Deal</div>
           <div class="result-value" id="r-earnings">$6,400</div>
           <div class="result-sub" id="r-earnings-sub">50% of $12,800 gross margin</div>
         </div>
-      </div>
-    </div>
-  </div>
+      </div><!-- /calc-results -->
 
-  <!-- Battery Calculator -->
+    </div>
+  </div><!-- /tab-commission -->
+
+  <!-- ══════════════════════════════════
+       TESLA POWERWALL 3 CALCULATOR
+  ══════════════════════════════════ -->
   <div class="calc-panel" id="tab-battery">
     <div class="calc-grid" data-aos="fade-up">
+
       <div class="calc-form-box">
-        <div class="calc-form-title">Battery &amp; NEM 3.0 Calculator</div>
-        <div class="calc-form-sub">Estimate battery adder value, savings under NEM 3.0 avoided-cost export rates, and payback timeline.</div>
+        <div class="calc-form-title">Tesla Powerwall 3 Calculator</div>
+        <div class="calc-form-sub">13.5 kWh per unit · $11,500 each. Estimate adder value, NEM 3.0 savings, and your commission opportunity.</div>
+
+        <!-- Powerwall quantity with visual controls -->
+        <div class="form-field">
+          <label class="form-label">Number of Tesla Powerwall 3 Units</label>
+          <div style="display:flex;align-items:center;gap:12px;margin-top:4px;">
+            <button type="button" onclick="adjustQty(-1)" style="width:40px;height:40px;background:var(--forge-steel);border:1px solid rgba(255,255,255,0.08);color:var(--forge-white);font-size:1.2rem;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:border-color 0.2s;" onmouseover="this.style.borderColor='var(--solar-blue)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.08)'">−</button>
+            <input type="number" class="form-input" id="bc-quantity" value="1" min="1" max="10" step="1" oninput="calcBattery()" style="width:80px;text-align:center;font-family:var(--font-display);font-size:1.3rem;font-weight:600;">
+            <button type="button" onclick="adjustQty(1)" style="width:40px;height:40px;background:var(--forge-steel);border:1px solid rgba(255,255,255,0.08);color:var(--forge-white);font-size:1.2rem;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:border-color 0.2s;" onmouseover="this.style.borderColor='var(--solar-blue)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.08)'">+</button>
+            <div style="font-family:var(--font-mono);font-size:0.58rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--forge-ash);">
+              <div id="pw3-kwh-display" style="color:var(--energy-green);font-size:0.68rem;">13.5 kWh total</div>
+              <div>@ $11,500 / unit</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tesla Powerwall 3 badge -->
+        <div style="display:flex;align-items:center;gap:14px;padding:14px 18px;background:rgba(0,204,102,0.05);border:1px solid rgba(0,204,102,0.15);margin-bottom:20px;">
+          <div style="font-size:1.4rem;">⚡</div>
+          <div>
+            <div style="font-family:var(--font-mono);font-size:0.58rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--energy-green);margin-bottom:3px;">Selected Unit</div>
+            <div style="font-family:var(--font-display);font-size:1rem;font-weight:600;color:var(--forge-white);">Tesla Powerwall 3</div>
+            <div style="font-size:0.75rem;color:var(--forge-ash);">13.5 kWh · 11.5 kW continuous · whole-home backup capable</div>
+          </div>
+        </div>
 
         <div class="form-field">
           <label class="form-label">Solar System Size (kW)</label>
           <input type="number" class="form-input" id="bc-kw" value="8" min="2" max="50" step="0.5" oninput="calcBattery()">
         </div>
-        <div class="form-field">
-          <label class="form-label">Battery Size (kWh)</label>
-          <select class="form-input" id="bc-kwh" onchange="calcBattery()">
-            <option value="5">5 kWh — Small home, partial backup</option>
-            <option value="6.5">6.5 kWh — Medium home, daily cycling</option>
-            <option value="9.6" selected>9.6 kWh — Standard, full-day cycle</option>
-            <option value="13.5">13.5 kWh — Whole-home backup</option>
-          </select>
-        </div>
+
         <div class="form-field">
           <label class="form-label">Utility</label>
           <select class="form-input" id="bc-utility" onchange="calcBattery()">
@@ -196,73 +234,74 @@
             <option value="other">Other Municipal Utility</option>
           </select>
         </div>
+
         <div class="form-field">
           <label class="form-label">Customer's Average Monthly Bill ($)</label>
           <input type="number" class="form-input" id="bc-bill" value="280" min="50" max="2000" step="10" oninput="calcBattery()">
         </div>
+
         <div class="calc-disclaimer">
-          NEM 3.0 avoided-cost export rates ~$0.05–$0.08/kWh (2026 CPUC estimates). Battery pricing ~$850/kWh (Axia placeholder — verify current). SGIP incentives not included — may reduce effective cost. For estimation only.
+          NEM 3.0 avoided-cost export rates ~$0.05–$0.08/kWh (2026 CPUC). Tesla Powerwall 3: 13.5 kWh, $11,500/unit (verify current Axia pricing). SGIP incentives not included — may reduce effective customer cost. For estimation only.
         </div>
-      </div>
+      </div><!-- /calc-form-box -->
 
       <div class="calc-results">
-        <div class="result-eyebrow">Battery Analysis · NEM 3.0 · 2026</div>
+        <div class="result-eyebrow">Tesla Powerwall 3 Analysis · NEM 3.0 · 2026</div>
+
         <div class="result-item">
-          <div class="result-label">Battery Adder Cost (~$850/kWh)</div>
-          <div class="result-value" id="br-cost">$8,160</div>
-          <div class="result-sub" id="br-cost-sub">9.6 kWh × $850/kWh</div>
+          <div class="result-label">Configuration</div>
+          <div class="result-value" id="br-units">1 unit</div>
+          <div class="result-sub" id="br-kwh">13.5 kWh total</div>
         </div>
+
+        <div class="result-item">
+          <div class="result-label">Battery Adder Cost</div>
+          <div class="result-value" id="br-cost">$11,500</div>
+          <div class="result-sub" id="br-cost-sub">1 × $11,500 — Tesla Powerwall 3</div>
+        </div>
+
         <div class="result-item">
           <div class="result-label">Est. Annual Savings w/ Battery (NEM 3.0)</div>
-          <div class="result-value" id="br-savings">$1,820</div>
-          <div class="result-sub" id="br-savings-sub">vs. $840 without battery</div>
+          <div class="result-value" id="br-savings">—</div>
+          <div class="result-sub" id="br-savings-sub">vs. solar-only under NEM 3.0</div>
         </div>
+
         <div class="result-item">
           <div class="result-label">Battery Payback Period</div>
-          <div class="result-value" id="br-payback">4.5 yrs</div>
-          <div class="result-sub" id="br-payback-sub">Battery adder ÷ incremental savings</div>
+          <div class="result-value" id="br-payback">—</div>
+          <div class="result-sub" id="br-payback-sub">Battery cost ÷ incremental annual savings</div>
         </div>
+
         <div class="result-item highlight">
-          <div class="result-label">🟢 Added Commission Opportunity</div>
-          <div class="result-value" id="br-commission">$2,040</div>
-          <div class="result-sub" id="br-commission-sub">~25% margin on battery adder at $2.90/W basis</div>
+          <div class="result-label">🟢 Your Commission on This Adder</div>
+          <div class="result-value" id="br-commission">$1,645</div>
+          <div class="result-sub" id="br-commission-sub">$11,500 × 14.3% adder commission rate</div>
         </div>
-      </div>
+      </div><!-- /calc-results -->
+
     </div>
-  </div>
+  </div><!-- /tab-battery -->
+
 </section>
 </main>
-<!-- ════════════════════════════════════════════
-     FOOTER
-════════════════════════════════════════════ -->
+
+<!-- FOOTER -->
 <footer>
   <div class="footer-inner">
     <div class="footer-copy">
       © 2026 TiviForge Solar Rep Academy<br>
-      Authorized Axia by Qcells Sales Partner · California · academy@tiviforge.com
+      Authorized Axia by Qcells Sales Partner · California · Tivi@tiviforge.com
     </div>
     <div class="footer-links">
       <a href="about.html">Disclaimers</a>
       <a href="https://www.cslb.ca.gov" target="_blank" rel="noopener">CSLB.gov</a>
-      <a href="mailto:academy@tiviforge.com">Contact</a>
+      <a href="mailto:Tivi@tiviforge.com">Contact</a>
       <a href="apply.html">Apply Now</a>
     </div>
   </div>
 </footer>
-<!-- ════════════════════════════════════════════
-     AI SOLAR COACH WIDGET
-     SYSTEM PROMPT (kept in code for reference):
-     "You are the official TiviForge Solar Expert AI Coach
-     for 1099 California solar sales representatives.
-     Always base answers only on the transparent $2.90/W
-     redline. Never mention owner override or higher margins.
-     Be knowledgeable on Aurora Solar, all CA utilities,
-     NEM 3.0/Net Billing Tariff 2026 avoided-cost export
-     rates (~$0.05–$0.08/kWh), battery systems & SGIP,
-     energy bill reading, CSLB HIS registration, Solar
-     Disclosure Document, Title 24, HSSA rescission rights,
-     and compliant sales practices."
-════════════════════════════════════════════ -->
+
+<!-- AI Solar Coach Widget -->
 <div id="coach-widget">
   <div id="coach-panel">
     <div class="coach-header">
@@ -277,7 +316,7 @@
     <div class="coach-quick-asks" id="quickAsks">
       <button class="quick-btn" onclick="askCoach(this.textContent)">NEM 3.0 rates?</button>
       <button class="quick-btn" onclick="askCoach(this.textContent)">How to get HIS?</button>
-      <button class="quick-btn" onclick="askCoach(this.textContent)">Battery sizing help</button>
+      <button class="quick-btn" onclick="askCoach(this.textContent)">Powerwall 3 sizing help</button>
       <button class="quick-btn" onclick="askCoach(this.textContent)">Aurora sub-account?</button>
       <button class="quick-btn" onclick="askCoach(this.textContent)">SGIP incentives 2026?</button>
     </div>
@@ -292,10 +331,29 @@
     <div class="coach-badge">AI</div>
   </button>
 </div>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>window.addEventListener('load', () => { document.body.style.visibility = 'visible'; });</script>
-<script src="main.js?v=20260318b"></script>
-<script src="coach.js?v=20260318b"></script>
+<script src="main.js?v=20260318c"></script>
+<script src="coach.js?v=20260318c"></script>
+<script>
+  // Quantity adjustment buttons
+  function adjustQty(delta) {
+    const input = document.getElementById('bc-quantity');
+    const current = parseInt(input.value) || 1;
+    const newVal = Math.max(1, Math.min(10, current + delta));
+    input.value = newVal;
+    const kwhDisplay = document.getElementById('pw3-kwh-display');
+    if (kwhDisplay) kwhDisplay.textContent = (newVal * 13.5).toFixed(1) + ' kWh total';
+    calcBattery();
+  }
+  // Keep kWh display in sync when typing
+  document.getElementById('bc-quantity').addEventListener('input', function() {
+    const kwhDisplay = document.getElementById('pw3-kwh-display');
+    const val = parseInt(this.value) || 1;
+    if (kwhDisplay) kwhDisplay.textContent = (val * 13.5).toFixed(1) + ' kWh total';
+  });
+</script>
 </body>
 </html>

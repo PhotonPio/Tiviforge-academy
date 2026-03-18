@@ -1,4 +1,4 @@
-<!-- TiviForge Multi-Page v2.1 — GitHub Pages Ready -->
+<!-- TiviForge Multi-Page v2.2 — GitHub Pages Ready -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,7 +12,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Syne:wght@400;500;600;700;800&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet" />
   <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet" />
-  <link rel="preload" href="styles.css?v=20260318b" as="style" />
+  <link rel="preload" href="styles.css?v=20260318c" as="style" />
   <style>
     html { background: #050507; }
     body {
@@ -25,12 +25,176 @@
       font-family: "Syne", sans-serif;
       visibility: hidden;
     }
+
+    /* ── Founder Section ── */
+    #founder {
+      background: var(--forge-black);
+      padding: var(--section-py) var(--pad-x);
+      border-bottom: 1px solid rgba(0,102,204,0.1);
+    }
+    .founder-grid {
+      display: grid;
+      grid-template-columns: 420px 1fr;
+      gap: clamp(48px, 8vw, 100px);
+      align-items: start;
+      margin-top: 56px;
+    }
+    .founder-photo-wrap {
+      position: relative;
+    }
+    .founder-photo-wrap img {
+      width: 100%;
+      aspect-ratio: 3/4;
+      object-fit: cover;
+      object-position: top center;
+      display: block;
+      border: 1px solid rgba(0,102,204,0.15);
+    }
+    .founder-photo-badge {
+      position: absolute;
+      bottom: -1px;
+      left: 0;
+      right: 0;
+      background: linear-gradient(90deg, rgba(0,102,204,0.95), rgba(0,204,102,0.9));
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .founder-photo-badge .badge-icon { font-size: 1.1rem; }
+    .founder-photo-badge .badge-name {
+      font-family: var(--font-display);
+      font-size: 1rem;
+      font-weight: 600;
+      color: #fff;
+    }
+    .founder-photo-badge .badge-title {
+      font-family: var(--font-mono);
+      font-size: 0.58rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.8);
+      margin-top: 2px;
+    }
+    .founder-photo-replace-note {
+      font-family: var(--font-mono);
+      font-size: 0.58rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--forge-smoke);
+      margin-top: 10px;
+      text-align: center;
+    }
+    .founder-story .headline { margin-bottom: 32px; }
+    .founder-story p {
+      font-size: 0.98rem;
+      color: var(--forge-ash);
+      line-height: 1.9;
+      margin-bottom: 22px;
+    }
+    .founder-story p strong { color: var(--forge-silver); }
+    .founder-quote {
+      margin: 36px 0;
+      padding: 24px 32px;
+      border-left: 3px solid var(--solar-blue);
+      background: rgba(0,102,204,0.05);
+    }
+    .founder-quote p {
+      font-family: var(--font-display);
+      font-size: clamp(1.15rem, 2vw, 1.5rem);
+      font-style: italic;
+      line-height: 1.55;
+      color: var(--forge-white);
+      margin-bottom: 0;
+    }
+    .founder-signature {
+      margin-top: 36px;
+      padding-top: 28px;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+    .founder-sig-line {
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      font-style: italic;
+      color: var(--forge-white);
+    }
+    .founder-sig-meta {
+      font-family: var(--font-mono);
+      font-size: 0.58rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--solar-blue);
+    }
+
+    /* ── Photo Gallery ── */
+    #installation-gallery {
+      background: var(--forge-obsidian);
+      padding: var(--section-py) var(--pad-x);
+    }
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: auto auto;
+      gap: 12px;
+      margin-top: 48px;
+    }
+    .gallery-item {
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.04);
+    }
+    .gallery-item.wide {
+      grid-column: span 2;
+    }
+    .gallery-item.tall {
+      grid-row: span 2;
+    }
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      min-height: 240px;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .gallery-item:hover img { transform: scale(1.04); }
+    .gallery-caption {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 12px 16px;
+      background: linear-gradient(transparent, rgba(5,5,7,0.85));
+      font-family: var(--font-mono);
+      font-size: 0.58rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.7);
+    }
+    .gallery-caption strong { color: var(--energy-green); }
+
+    @media (max-width: 900px) {
+      .founder-grid { grid-template-columns: 1fr; }
+      .founder-photo-wrap { max-width: 400px; margin: 0 auto; }
+      .gallery-grid { grid-template-columns: 1fr 1fr; }
+      .gallery-item.wide { grid-column: span 2; }
+      .gallery-item.tall { grid-row: span 1; }
+    }
+    @media (max-width: 600px) {
+      .gallery-grid { grid-template-columns: 1fr; }
+      .gallery-item.wide,
+      .gallery-item.tall { grid-column: span 1; grid-row: span 1; }
+    }
   </style>
-  <link rel="stylesheet" href="styles.css?v=20260318b" />
-  <title>About & Legal | TiviForge</title>
-  <meta name="description" content="About TiviForge and legal disclosures." />
+  <link rel="stylesheet" href="styles.css?v=20260318c" />
+  <title>About | TiviForge Solar Rep Academy</title>
+  <meta name="description" content="About TiviForge — built by a California solar rep who got tired of watching talented reps work blind. Transparent redline, real training, 1099 independence." />
 </head>
 <body data-page="about">
+
 <!-- Top Email Capture Banner -->
 <div id="top-banner">
   <div class="top-banner-text">⚡ <strong>Free Download:</strong> The $2.90/W Redline Commission Calculator PDF</div>
@@ -38,33 +202,17 @@
     <input type="email" class="top-banner-input" id="banner-email" placeholder="your@email.com" required>
     <button type="submit" class="top-banner-btn">Send Me the PDF →</button>
   </form>
-  <button class="top-banner-close" onclick="document.getElementById('top-banner').style.display='none'" aria-label="Close banner">✕</button>
-</div>
-
-<!-- Exit-Intent Popup -->
-<div id="exit-popup" role="dialog" aria-modal="true">
-  <div class="exit-popup-inner">
-    <button class="exit-popup-close" onclick="closeExitPopup()" aria-label="Close">✕</button>
-    <div class="exit-popup-eyebrow">Wait — Free Calculator PDF</div>
-    <h2 class="exit-popup-title">Get the <em>$2.90/W Redline</em><br>Commission Calculator PDF</h2>
-    <p class="exit-popup-sub">The exact tool TiviForge reps use to calculate their take-home before every deal — with adder deductions, battery commissions, and the full deal breakdown. Free, instant download.</p>
-    <form class="exit-popup-form" onsubmit="submitExitEmail(event)">
-      <input type="email" id="exit-email" placeholder="your@email.com" required>
-      <button type="submit">Send It →</button>
-    </form>
-    <div class="exit-popup-disclaimer">No spam. Instant delivery. Unsubscribe anytime.</div>
-  </div>
+  <button class="top-banner-close" aria-label="Close banner">✕</button>
 </div>
 
 <!-- Custom Cursor -->
 <div id="cursor-ring"></div>
 <div id="cursor-dot"></div>
-
 <!-- Progress Bar -->
 <div id="progress"></div>
-
 <!-- Toast -->
 <div id="toast"></div>
+
 <nav id="nav">
   <a href="index.html" class="nav-logo"><div class="solar-mark">☀</div><span><span class="t">T</span>iviForge</span></a>
   <ul class="nav-links">
@@ -83,23 +231,175 @@
   <a href="academy.html" onclick="closeMobile()">Training Academy</a>
   <a href="calculators.html" onclick="closeMobile()">Calculators</a>
   <a href="resources.html" onclick="closeMobile()">Resources</a>
-  <a href="about.html" onclick="closeMobile()">About & Legal</a>
+  <a href="about.html" onclick="closeMobile()">About &amp; Legal</a>
   <a href="apply.html" onclick="closeMobile()">Apply</a>
   <a href="login.html" class="nav-cta" onclick="closeMobile(); trackCTA('Mobile Rep Login', 'mobile_nav')">Rep Login →</a>
 </div>
+
 <main class="page-shell">
-<section class="page-hero"><div class="eyebrow">About & Legal</div><h1>Built by a Rep</h1><p>Transparent solar sales training with compliance-first operations.</p></section>
+<section class="page-hero">
+  <div class="eyebrow">About &amp; Legal</div>
+  <h1>Built by a Rep</h1>
+  <p>Transparent solar sales training with compliance-first operations — created for the reps who deserved better.</p>
+</section>
+
+<!-- ════════════════════════════════════════════
+     FOUNDER SECTION
+════════════════════════════════════════════ -->
+<section id="founder" data-aos="fade-up">
+  <div class="eyebrow">The Founder</div>
+  <h2 class="headline">I Built This<br><em>For You</em></h2>
+
+  <div class="founder-grid">
+
+    <div class="founder-photo-wrap" data-aos="fade-right">
+      <!--
+        ╔══════════════════════════════════════════╗
+        ║  REPLACE THIS IMAGE WITH YOUR OWN PHOTO  ║
+        ║  Recommended: 420×560px, portrait crop   ║
+        ║  Replace the src below with your image   ║
+        ╚══════════════════════════════════════════╝
+      -->
+      <img
+        src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=840&h=1120&fit=crop&auto=format&q=80"
+        alt="Tivi — Founder, TiviForge Solar Rep Academy"
+        loading="eager"
+      />
+      <div class="founder-photo-badge">
+        <div class="badge-icon">☀</div>
+        <div>
+          <div class="badge-name">Tivi</div>
+          <div class="badge-title">Founder · TiviForge Solar Rep Academy</div>
+        </div>
+      </div>
+      <!-- Remove this note once you add your real photo -->
+      <div class="founder-photo-replace-note">↑ Replace with your actual photo</div>
+    </div>
+
+    <div class="founder-story" data-aos="fade-left">
+      <p>I spent years in the field knocking doors across California, watching <strong>talented reps work harder than anyone in the building</strong> — and still not know what they were actually worth per deal. Not because they weren't smart. Because their companies made sure they didn't.</p>
+
+      <p>The redline was hidden. The battery math was buried. The training was a three-page script and a "figure it out." And if you asked too many questions about margins, you got managed out.</p>
+
+      <div class="founder-quote">
+        <p>"Most reps have no idea how much they're leaving on every deal. That's not an accident — it's a feature of the system they're in. I built TiviForge to flip that."</p>
+      </div>
+
+      <p>After securing an <strong>authorized partnership in the Axia by Qcells network</strong>, I had two choices: run my own pipeline quietly, or build something that could help every rep who's ever been kept in the dark.</p>
+
+      <p>I chose to build it for you. The <strong>$2.90/W redline is published because you deserve to know your floor</strong>. The Aurora sub-account is yours because you shouldn't need a manager to design your own proposals. The 7-module curriculum exists because NEM 3.0, battery sizing, CSLB compliance, and TOU rate reading are <em>real skills</em> — not things you should have to piece together from YouTube at midnight.</p>
+
+      <p>TiviForge is for the rep who wants to <strong>own their craft, own their income, and stop selling blind</strong>. Everything I've learned in this industry is in this platform — and I built it because you earned the right to know it.</p>
+
+      <div class="founder-signature">
+        <div>
+          <div class="founder-sig-line">— Tivi</div>
+          <div class="founder-sig-meta" style="margin-top:6px;">Founder · TiviForge Solar Rep Academy · California · 2026</div>
+        </div>
+      </div>
+
+      <div style="margin-top:36px; display:flex; gap:16px; flex-wrap:wrap;">
+        <a href="apply.html" class="btn-primary green" onclick="trackCTA('About Founder CTA', 'about')">Apply as a 1099 Rep →</a>
+        <a href="mailto:Tivi@tiviforge.com" class="btn-secondary">Tivi@tiviforge.com</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════
+     INSTALLATION PHOTO GALLERY
+════════════════════════════════════════════ -->
+<section id="installation-gallery" data-aos="fade-up">
+  <div class="eyebrow green">The Work</div>
+  <h2 class="headline">California Solar<br><em>In the Field</em></h2>
+  <p class="subtext">Rooftop installs, ground mounts, and Tesla Powerwall 3 systems — the kind of work TiviForge reps bring to California homeowners.</p>
+
+  <div class="gallery-grid">
+
+    <!-- Row 1 -->
+    <div class="gallery-item wide" data-aos="fade-up" data-aos-delay="0">
+      <img
+        src="https://images.unsplash.com/photo-1509391366360-2e959784a276?w=1200&h=540&fit=crop&auto=format&q=80"
+        alt="Residential solar panel installation on California rooftop"
+        loading="lazy"
+      />
+      <div class="gallery-caption"><strong>Rooftop Solar</strong> — Residential installation, Southern California</div>
+    </div>
+
+    <div class="gallery-item tall" data-aos="fade-up" data-aos-delay="60">
+      <img
+        src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=600&h=900&fit=crop&auto=format&q=80"
+        alt="Home battery storage Tesla Powerwall installation"
+        loading="lazy"
+      />
+      <div class="gallery-caption"><strong>Tesla Powerwall 3</strong> — Home battery storage, whole-home backup</div>
+    </div>
+
+    <!-- Row 2 -->
+    <div class="gallery-item" data-aos="fade-up" data-aos-delay="80">
+      <img
+        src="https://images.unsplash.com/photo-1466611653911-95081537e5b7?w=600&h=400&fit=crop&auto=format&q=80"
+        alt="Solar panel installation crew working on rooftop"
+        loading="lazy"
+      />
+      <div class="gallery-caption"><strong>Installation Day</strong> — Axia by Qcells certified install team</div>
+    </div>
+
+    <div class="gallery-item" data-aos="fade-up" data-aos-delay="100">
+      <img
+        src="https://images.unsplash.com/photo-1508514179049-1b9c2f0a4b8e?w=600&h=400&fit=crop&auto=format&q=80"
+        alt="Large solar array ground mount installation"
+        loading="lazy"
+      />
+      <div class="gallery-caption"><strong>Ground Mount</strong> — Larger capacity rural system</div>
+    </div>
+
+    <!-- Row 3 -->
+    <div class="gallery-item" data-aos="fade-up" data-aos-delay="0">
+      <img
+        src="https://images.unsplash.com/photo-1600880292089-90a7e086ee0c?w=600&h=400&fit=crop&auto=format&q=80"
+        alt="Solar panels on residential home California"
+        loading="lazy"
+      />
+      <div class="gallery-caption"><strong>Residential Rooftop</strong> — NEM 3.0 system with battery</div>
+    </div>
+
+    <div class="gallery-item" data-aos="fade-up" data-aos-delay="60">
+      <img
+        src="https://images.unsplash.com/photo-1548337138-e87d889cc369?w=600&h=400&fit=crop&auto=format&q=80"
+        alt="Ground mount solar farm installation"
+        loading="lazy"
+      />
+      <div class="gallery-caption"><strong>Ground Mount Array</strong> — Maximum production orientation</div>
+    </div>
+
+    <div class="gallery-item" data-aos="fade-up" data-aos-delay="120">
+      <img
+        src="https://images.unsplash.com/photo-1497440001374-f26997328c1b?w=600&h=400&fit=crop&auto=format&q=80"
+        alt="Solar panels in California sunlight"
+        loading="lazy"
+      />
+      <div class="gallery-caption"><strong>California Solar</strong> — The highest-potential solar market in the US</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════
+     ABOUT & LEGAL
+════════════════════════════════════════════ -->
 <section id="about" data-aos="fade-up">
   <div class="eyebrow">About &amp; Legal</div>
-  <h2 class="headline">Built by a Rep<br><em>For Reps</em></h2>
+  <h2 class="headline">Transparent Operations,<br><em>Compliance First</em></h2>
 
   <div class="about-grid">
     <div class="about-text">
       <p>TiviForge was built by a California solar salesperson who got tired of watching talented reps work hard for companies that hid pricing, inflated redlines, and left their teams with no real training — just a script and a prayer.</p>
       <p>After securing an <strong>authorized partnership in the Axia by Qcells network</strong>, TiviForge now offers 1099 independent contractors a real opportunity: a transparent redline, professional tools, and actual education on how California solar works in 2026.</p>
       <p>We are not a solar contractor. We are a <strong>sales partnership and training academy</strong>. All system designs are reviewed and finalized by properly licensed Axia by Qcells contractors. All 1099 reps operate as independent contractors under California law, including required CSLB HIS registration.</p>
-      <p>Questions? Reach us at <a href="mailto:academy@tiviforge.com" style="color: var(--solar-blue);">academy@tiviforge.com</a> or through the AI Solar Coach widget below.</p>
-      <div style="margin-top: 32px;">
+      <p>Questions? Reach us at <a href="mailto:Tivi@tiviforge.com" style="color: var(--solar-blue);">Tivi@tiviforge.com</a> or through the AI Solar Coach widget below.</p>
+      <div style="margin-top: 32px; display:flex; gap:14px; flex-wrap:wrap;">
         <a href="https://www.cslb.ca.gov" target="_blank" rel="noopener" class="btn-text" style="color: var(--forge-ash);">CSLB.gov — Verify Licenses →</a>
       </div>
     </div>
@@ -110,7 +410,7 @@
         <p><strong style="color: var(--forge-silver);">Partnership:</strong> TiviForge is an authorized sales partner in the Axia by Qcells network. All solar system designs and contracts are reviewed and executed by properly licensed California contractors. TiviForge does not hold a contractor's license.</p>
       </div>
       <div class="legal-item">
-        <p><strong style="color: var(--forge-silver);">Earnings:</strong> Training, calculators, and redline pricing are for educational and estimation purposes only. Earnings are not guaranteed and depend entirely on individual effort, market conditions, and closing ability. Past performance of other reps is not indicative of your results.</p>
+        <p><strong style="color: var(--forge-silver);">Earnings:</strong> Training, calculators, and redline pricing are for educational and estimation purposes only. Earnings are not guaranteed and depend entirely on individual effort, market conditions, and closing ability.</p>
       </div>
       <div class="legal-item">
         <p><strong style="color: var(--forge-silver);">CSLB HIS Requirement:</strong> All 1099 independent contractors who solicit, negotiate, or sell home improvement contracts in California must obtain and maintain valid CSLB Home Improvement Salesperson (HIS) registration. TiviForge provides guidance but does not guarantee approval. <a href="https://www.cslb.ca.gov" target="_blank" rel="noopener">CSLB.gov</a></p>
@@ -121,41 +421,31 @@
       <div class="legal-item">
         <p><strong style="color: var(--forge-silver);">Solar Disclosure:</strong> California law requires the Solar Energy System Disclosure Document be provided to homeowners in 16-pt bold before signing. The Home Solicitation Sales Act provides a 3-day right of rescission. TiviForge provides compliance training — all reps are responsible for following applicable law.</p>
       </div>
+      <div class="legal-item">
+        <p><strong style="color: var(--forge-silver);">Tesla Powerwall 3 Pricing:</strong> Battery pricing of $11,500/unit is an Axia partnership estimate as of Q1 2026. Verify current pricing with the Axia partner team before quoting customers. SGIP incentives, where applicable, may reduce effective cost.</p>
+      </div>
     </div>
   </div>
 </section>
 </main>
-<!-- ════════════════════════════════════════════
-     FOOTER
-════════════════════════════════════════════ -->
+
+<!-- FOOTER -->
 <footer>
   <div class="footer-inner">
     <div class="footer-copy">
       © 2026 TiviForge Solar Rep Academy<br>
-      Authorized Axia by Qcells Sales Partner · California · academy@tiviforge.com
+      Authorized Axia by Qcells Sales Partner · California · Tivi@tiviforge.com
     </div>
     <div class="footer-links">
       <a href="about.html">Disclaimers</a>
       <a href="https://www.cslb.ca.gov" target="_blank" rel="noopener">CSLB.gov</a>
-      <a href="mailto:academy@tiviforge.com">Contact</a>
+      <a href="mailto:Tivi@tiviforge.com">Contact</a>
       <a href="apply.html">Apply Now</a>
     </div>
   </div>
 </footer>
-<!-- ════════════════════════════════════════════
-     AI SOLAR COACH WIDGET
-     SYSTEM PROMPT (kept in code for reference):
-     "You are the official TiviForge Solar Expert AI Coach
-     for 1099 California solar sales representatives.
-     Always base answers only on the transparent $2.90/W
-     redline. Never mention owner override or higher margins.
-     Be knowledgeable on Aurora Solar, all CA utilities,
-     NEM 3.0/Net Billing Tariff 2026 avoided-cost export
-     rates (~$0.05–$0.08/kWh), battery systems & SGIP,
-     energy bill reading, CSLB HIS registration, Solar
-     Disclosure Document, Title 24, HSSA rescission rights,
-     and compliant sales practices."
-════════════════════════════════════════════ -->
+
+<!-- AI Solar Coach Widget -->
 <div id="coach-widget">
   <div id="coach-panel">
     <div class="coach-header">
@@ -185,10 +475,11 @@
     <div class="coach-badge">AI</div>
   </button>
 </div>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>window.addEventListener('load', () => { document.body.style.visibility = 'visible'; });</script>
-<script src="main.js?v=20260318b"></script>
-<script src="coach.js?v=20260318b"></script>
+<script src="main.js?v=20260318c"></script>
+<script src="coach.js?v=20260318c"></script>
 </body>
 </html>

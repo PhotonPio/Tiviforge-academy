@@ -1,4 +1,4 @@
-<!-- TiviForge Multi-Page v2.1 — GitHub Pages Ready -->
+<!-- TiviForge Multi-Page v2.2 — GitHub Pages Ready -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,7 +12,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Syne:wght@400;500;600;700;800&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet" />
   <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet" />
-  <link rel="preload" href="styles.css?v=20260318b" as="style" />
+  <link rel="preload" href="styles.css?v=20260318c" as="style" />
   <style>
     html { background: #050507; }
     body {
@@ -25,12 +25,49 @@
       font-family: "Syne", sans-serif;
       visibility: hidden;
     }
+
+    /* Academy lock state — default */
+    .module-locked-notice {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 16px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.06);
+      font-family: var(--font-mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--forge-smoke);
+      margin-top: 8px;
+    }
+    /* Hidden when logged in */
+    body.academy-unlocked .module-locked-notice { display: none; }
+    body.academy-unlocked .module-item {
+      border-left: 2px solid rgba(0,204,102,0.2);
+    }
+    body.academy-unlocked .module-item.open {
+      border-left-color: var(--energy-green);
+    }
+    .module-unlock-badge {
+      display: none;
+      font-family: var(--font-mono);
+      font-size: 0.55rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--energy-green);
+      padding: 3px 8px;
+      border: 1px solid rgba(0,204,102,0.3);
+      background: rgba(0,204,102,0.05);
+    }
+    body.academy-unlocked .module-unlock-badge { display: inline-block; }
   </style>
-  <link rel="stylesheet" href="styles.css?v=20260318b" />
+  <link rel="stylesheet" href="styles.css?v=20260318c" />
   <title>Training Academy | TiviForge</title>
-  <meta name="description" content="All 7 TiviForge training modules for California 1099 solar reps." />
+  <meta name="description" content="All 7 TiviForge training modules for California 1099 solar reps. NEM 3.0, battery mastery, Aurora Solar, CSLB compliance, closing scripts." />
 </head>
 <body data-page="academy">
+
 <!-- Top Email Capture Banner -->
 <div id="top-banner">
   <div class="top-banner-text">⚡ <strong>Free Download:</strong> The $2.90/W Redline Commission Calculator PDF</div>
@@ -38,33 +75,17 @@
     <input type="email" class="top-banner-input" id="banner-email" placeholder="your@email.com" required>
     <button type="submit" class="top-banner-btn">Send Me the PDF →</button>
   </form>
-  <button class="top-banner-close" onclick="document.getElementById('top-banner').style.display='none'" aria-label="Close banner">✕</button>
-</div>
-
-<!-- Exit-Intent Popup -->
-<div id="exit-popup" role="dialog" aria-modal="true">
-  <div class="exit-popup-inner">
-    <button class="exit-popup-close" onclick="closeExitPopup()" aria-label="Close">✕</button>
-    <div class="exit-popup-eyebrow">Wait — Free Calculator PDF</div>
-    <h2 class="exit-popup-title">Get the <em>$2.90/W Redline</em><br>Commission Calculator PDF</h2>
-    <p class="exit-popup-sub">The exact tool TiviForge reps use to calculate their take-home before every deal — with adder deductions, battery commissions, and the full deal breakdown. Free, instant download.</p>
-    <form class="exit-popup-form" onsubmit="submitExitEmail(event)">
-      <input type="email" id="exit-email" placeholder="your@email.com" required>
-      <button type="submit">Send It →</button>
-    </form>
-    <div class="exit-popup-disclaimer">No spam. Instant delivery. Unsubscribe anytime.</div>
-  </div>
+  <button class="top-banner-close" aria-label="Close banner">✕</button>
 </div>
 
 <!-- Custom Cursor -->
 <div id="cursor-ring"></div>
 <div id="cursor-dot"></div>
-
 <!-- Progress Bar -->
 <div id="progress"></div>
-
 <!-- Toast -->
 <div id="toast"></div>
+
 <nav id="nav">
   <a href="index.html" class="nav-logo"><div class="solar-mark">☀</div><span><span class="t">T</span>iviForge</span></a>
   <ul class="nav-links">
@@ -83,12 +104,26 @@
   <a href="academy.html" onclick="closeMobile()">Training Academy</a>
   <a href="calculators.html" onclick="closeMobile()">Calculators</a>
   <a href="resources.html" onclick="closeMobile()">Resources</a>
-  <a href="about.html" onclick="closeMobile()">About & Legal</a>
+  <a href="about.html" onclick="closeMobile()">About &amp; Legal</a>
   <a href="apply.html" onclick="closeMobile()">Apply</a>
   <a href="login.html" class="nav-cta" onclick="closeMobile(); trackCTA('Mobile Rep Login', 'mobile_nav')">Rep Login →</a>
 </div>
+
 <main class="page-shell">
-<section class="page-hero"><div class="eyebrow">Training Curriculum</div><h1>Academy Modules</h1><p>Full 7-module curriculum with practical, California-specific sales and compliance training.</p></section>
+<section class="page-hero">
+  <div class="eyebrow">Training Curriculum</div>
+  <h1>Academy Modules</h1>
+  <p>Full 7-module curriculum with practical, California-specific sales and compliance training.</p>
+  <!-- Auth state bar — shown by JS when logged in -->
+  <div id="academy-unlocked-bar" style="display:none;"></div>
+  <!-- Not logged in notice -->
+  <div id="academy-login-notice" style="margin-top:20px;padding:12px 20px;border-left:3px solid rgba(0,102,204,0.4);background:rgba(0,102,204,0.06);max-width:540px;display:none;">
+    <span style="font-family:'DM Mono',monospace;font-size:0.62rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--forge-ash);">
+      🔒 Module PDFs &amp; full access require login — <a href="login.html" style="color:var(--solar-blue);">Log in here →</a> or <a href="apply.html" style="color:var(--energy-green);">Apply to enroll</a>
+    </span>
+  </div>
+</section>
+
 <section id="academy">
   <div class="academy-header" data-aos="fade-up">
     <div>
@@ -100,38 +135,43 @@
 
   <div class="modules-list">
 
-    <div class="module-item open" data-aos="fade-up">
+    <!-- ── Module 01 ── -->
+    <div class="module-item open" data-aos="fade-up" data-module="01">
       <div class="module-header" onclick="toggleModule(this)">
         <div class="module-num">01</div>
         <img src="https://images.unsplash.com/photo-1581093458791-9d8e6b6f2f3f?w=96&h=96&fit=crop&auto=format&q=70" alt="California Energy Bills" class="module-icon-img" loading="lazy">
         <div class="module-title">Reading California Energy Bills</div>
         <div class="module-tag">Foundation</div>
+        <span class="module-unlock-badge">✓ Unlocked</span>
         <div class="module-arrow">+</div>
       </div>
       <div class="module-body">
         <p class="module-desc">Master the art of reading any California utility bill. Understand TOU (Time-of-Use) rate structures, baseline allowances, demand charges, tiered pricing, and how to calculate a customer's real annual spend. Know exactly how much they'll save — and prove it.</p>
         <div class="module-topics">
-          <span class="module-topic">PG&E E-TOU-C &amp; E-TOU-D</span>
+          <span class="module-topic">PG&amp;E E-TOU-C &amp; E-TOU-D</span>
           <span class="module-topic">SCE TOU-D-PRIME</span>
-          <span class="module-topic">SDG&E TOU-DR1</span>
+          <span class="module-topic">SDG&amp;E TOU-DR1</span>
           <span class="module-topic">LADWP Tier Analysis</span>
           <span class="module-topic">SMUD Rate Schedules</span>
           <span class="module-topic">Baseline Allowances</span>
           <span class="module-topic">Annual Usage Calculation</span>
         </div>
         <div class="module-actions">
-          <button class="module-btn primary" onclick="showToast('Module coming soon — apply to access')">▶ Start Module</button>
-          <button class="module-btn" onclick="showToast('PDF download available after enrollment')">⬇ Download Bill Guide PDF</button>
+          <button class="module-btn primary" data-locked-msg="Module coming soon — apply to access" data-unlocked-action="module-video" data-module-id="01">▶ Start Module</button>
+          <button class="module-btn" data-locked-msg="PDF download available after enrollment" data-pdf="assets/docs/utility-rate-cheat-sheets.pdf">⬇ Download Bill Guide PDF</button>
         </div>
+        <div class="module-locked-notice">🔒 Full module access requires enrollment — <a href="apply.html" style="color:var(--solar-blue);">Apply here</a></div>
       </div>
     </div>
 
-    <div class="module-item" data-aos="fade-up">
+    <!-- ── Module 02 ── -->
+    <div class="module-item" data-aos="fade-up" data-module="02">
       <div class="module-header" onclick="toggleModule(this)">
         <div class="module-num">02</div>
         <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=96&h=96&fit=crop&auto=format&q=70" alt="NEM 3.0 Net Billing" class="module-icon-img" loading="lazy">
         <div class="module-title">NEM 3.0 / Net Billing Tariff Deep Dive</div>
         <div class="module-tag new">2026 Updated</div>
+        <span class="module-unlock-badge">✓ Unlocked</span>
         <div class="module-arrow">+</div>
       </div>
       <div class="module-body">
@@ -145,43 +185,49 @@
           <span class="module-topic">Payback Calculations</span>
         </div>
         <div class="module-actions">
-          <button class="module-btn primary" onclick="showToast('Module coming soon — apply to access')">▶ Start Module</button>
-          <button class="module-btn" onclick="showToast('NEM 3.0 PDF available after enrollment')">⬇ NEM 3.0 Summary PDF</button>
+          <button class="module-btn primary" data-locked-msg="Module coming soon — apply to access" data-unlocked-action="module-video" data-module-id="02">▶ Start Module</button>
+          <button class="module-btn" data-locked-msg="NEM 3.0 PDF available after enrollment" data-pdf="assets/docs/nem3-full-summary-2026.pdf">⬇ NEM 3.0 Summary PDF</button>
         </div>
+        <div class="module-locked-notice">🔒 Full module access requires enrollment — <a href="apply.html" style="color:var(--solar-blue);">Apply here</a></div>
       </div>
     </div>
 
-    <div class="module-item" data-aos="fade-up">
+    <!-- ── Module 03 ── -->
+    <div class="module-item" data-aos="fade-up" data-module="03">
       <div class="module-header" onclick="toggleModule(this)">
         <div class="module-num">03</div>
         <img src="https://images.unsplash.com/photo-1581091226825-a6a035833173?w=96&h=96&fit=crop&auto=format&q=70" alt="Battery Storage SGIP" class="module-icon-img" loading="lazy">
         <div class="module-title">Battery Mastery &amp; SGIP Incentives</div>
         <div class="module-tag">High Value</div>
+        <span class="module-unlock-badge">✓ Unlocked</span>
         <div class="module-arrow">+</div>
       </div>
       <div class="module-body">
-        <p class="module-desc">Batteries are where top reps make real money in 2026. Learn to size correctly, price adders, stack SGIP incentives (up to $1,000/kWh in some tiers), calculate payback under NEM 3.0, and present battery value without overwhelming a customer. This module alone can add $1,500–$4,000 to your earnings per deal.</p>
+        <p class="module-desc">Batteries are where top reps make real money in 2026. Learn to size correctly using Tesla Powerwall 3 (13.5 kWh, $11,500/unit), stack SGIP incentives (up to $1,000/kWh in some tiers), calculate payback under NEM 3.0, and present battery value without overwhelming a customer.</p>
         <div class="module-topics">
-          <span class="module-topic">Qcells/Axia Battery Options</span>
-          <span class="module-topic">5 · 6.5 · 9.6 · 13.5 kWh Sizing</span>
+          <span class="module-topic">Tesla Powerwall 3 — 13.5 kWh</span>
+          <span class="module-topic">Multi-Unit Sizing (1–4 PW3)</span>
           <span class="module-topic">SGIP Reservation &amp; Incentive Tiers</span>
           <span class="module-topic">Self-Consumption Boost</span>
           <span class="module-topic">Backup Power Value Pitch</span>
           <span class="module-topic">Battery Objection Handlers</span>
         </div>
         <div class="module-actions">
-          <button class="module-btn primary" onclick="showToast('Module coming soon — apply to access')">▶ Start Module</button>
-          <a href="calculators.html" class="module-btn" onclick="switchTab('battery')">⚡ Open Battery Calculator</a>
+          <button class="module-btn primary" data-locked-msg="Module coming soon — apply to access" data-unlocked-action="module-video" data-module-id="03">▶ Start Module</button>
+          <a href="calculators.html" class="module-btn" onclick="switchTab && switchTab('battery')">⚡ Open Powerwall Calculator</a>
         </div>
+        <div class="module-locked-notice">🔒 Full module access requires enrollment — <a href="apply.html" style="color:var(--solar-blue);">Apply here</a></div>
       </div>
     </div>
 
-    <div class="module-item" data-aos="fade-up">
+    <!-- ── Module 04 ── -->
+    <div class="module-item" data-aos="fade-up" data-module="04">
       <div class="module-header" onclick="toggleModule(this)">
         <div class="module-num">04</div>
         <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=96&h=96&fit=crop&auto=format&q=70" alt="Aurora Solar Dashboard" class="module-icon-img" loading="lazy">
         <div class="module-title">Aurora Solar Mastery (Advanced)</div>
         <div class="module-tag">Your Credentials</div>
+        <span class="module-unlock-badge">✓ Unlocked</span>
         <div class="module-arrow">+</div>
       </div>
       <div class="module-body">
@@ -196,21 +242,24 @@
           <span class="module-topic">Permit-Ready Output</span>
         </div>
         <div class="module-actions">
-          <button class="module-btn primary" onclick="showToast('Aurora module unlocked after enrollment')">▶ Start Module</button>
-          <button class="module-btn" onclick="showToast('Aurora guide PDF available after enrollment')">⬇ Aurora Quick Reference</button>
+          <button class="module-btn primary" data-locked-msg="Aurora module unlocked after enrollment" data-unlocked-action="module-video" data-module-id="04">▶ Start Module</button>
+          <button class="module-btn" data-locked-msg="Aurora guide PDF available after enrollment" data-pdf="assets/docs/axia-qcells-product-reference.pdf">⬇ Aurora Quick Reference</button>
         </div>
+        <div class="module-locked-notice">🔒 Full module access requires enrollment — <a href="apply.html" style="color:var(--solar-blue);">Apply here</a></div>
       </div>
     </div>
 
-    <div class="module-item" data-aos="fade-up">
+    <!-- ── Module 05 ── -->
+    <div class="module-item" data-aos="fade-up" data-module="05">
       <div class="module-header" onclick="toggleModule(this)">
         <div class="module-num">05</div>
         <div class="module-title">California Codes, Compliance &amp; CSLB HIS</div>
         <div class="module-tag">Required</div>
+        <span class="module-unlock-badge">✓ Unlocked</span>
         <div class="module-arrow">+</div>
       </div>
       <div class="module-body">
-        <p class="module-desc">California law requires CSLB Home Improvement Salesperson (HIS) registration for anyone who solicits, negotiates, or sells home improvement contracts — including solar. We walk you through the exact registration process, what to say in the field, the Solar Energy System Disclosure Document requirements (16-pt bold), the 3-day right of rescission, and senior protections.</p>
+        <p class="module-desc">California law requires CSLB Home Improvement Salesperson (HIS) registration for anyone who solicits, negotiates, or sells home improvement contracts — including solar. We walk you through the exact registration process, the Solar Energy System Disclosure Document requirements (16-pt bold), the 3-day right of rescission, and senior protections.</p>
         <div class="module-topics">
           <span class="module-topic">CSLB HIS Registration Steps</span>
           <span class="module-topic">Solar Disclosure Document (16-pt)</span>
@@ -221,25 +270,28 @@
           <span class="module-topic">D2D Legal Best Practices</span>
         </div>
         <div class="module-actions">
-          <button class="module-btn primary" onclick="showToast('Compliance module unlocked after enrollment')">▶ Start Module</button>
-          <button class="module-btn" onclick="showToast('HIS guide PDF available after enrollment')">⬇ HIS Registration PDF Guide</button>
+          <button class="module-btn primary" data-locked-msg="Compliance module unlocked after enrollment" data-unlocked-action="module-video" data-module-id="05">▶ Start Module</button>
+          <button class="module-btn" data-locked-msg="HIS guide PDF available after enrollment" data-pdf="assets/docs/his-registration-guide.pdf">⬇ HIS Registration PDF Guide</button>
         </div>
+        <div class="module-locked-notice">🔒 Full module access requires enrollment — <a href="apply.html" style="color:var(--solar-blue);">Apply here</a></div>
       </div>
     </div>
 
-    <div class="module-item" data-aos="fade-up">
+    <!-- ── Module 06 ── -->
+    <div class="module-item" data-aos="fade-up" data-module="06">
       <div class="module-header" onclick="toggleModule(this)">
         <div class="module-num">06</div>
         <div class="module-title">California Utility Deep-Dives</div>
         <div class="module-tag">Reference</div>
+        <span class="module-unlock-badge">✓ Unlocked</span>
         <div class="module-arrow">+</div>
       </div>
       <div class="module-body">
         <p class="module-desc">Every California utility has different rate structures, interconnection timelines, NEM rules, and quirks that affect how you pitch. Know the territory before you knock the door.</p>
         <div class="module-topics">
-          <span class="module-topic">PG&E (NorCal)</span>
+          <span class="module-topic">PG&amp;E (NorCal)</span>
           <span class="module-topic">SCE (SoCal Edison)</span>
-          <span class="module-topic">SDG&E (San Diego)</span>
+          <span class="module-topic">SDG&amp;E (San Diego)</span>
           <span class="module-topic">LADWP (Los Angeles)</span>
           <span class="module-topic">SMUD (Sacramento)</span>
           <span class="module-topic">Anaheim Public Utilities</span>
@@ -249,17 +301,20 @@
           <span class="module-topic">Municipal Utilities</span>
         </div>
         <div class="module-actions">
-          <button class="module-btn primary" onclick="showToast('Utility modules unlocked after enrollment')">▶ Start Module</button>
-          <button class="module-btn" onclick="showToast('Rate cheat sheets available after enrollment')">⬇ Utility Rate Cheat Sheets</button>
+          <button class="module-btn primary" data-locked-msg="Utility modules unlocked after enrollment" data-unlocked-action="module-video" data-module-id="06">▶ Start Module</button>
+          <button class="module-btn" data-locked-msg="Rate cheat sheets available after enrollment" data-pdf="assets/docs/utility-rate-cheat-sheets.pdf">⬇ Utility Rate Cheat Sheets</button>
         </div>
+        <div class="module-locked-notice">🔒 Full module access requires enrollment — <a href="apply.html" style="color:var(--solar-blue);">Apply here</a></div>
       </div>
     </div>
 
-    <div class="module-item" data-aos="fade-up">
+    <!-- ── Module 07 ── -->
+    <div class="module-item" data-aos="fade-up" data-module="07">
       <div class="module-header" onclick="toggleModule(this)">
         <div class="module-num">07</div>
         <div class="module-title">Closing Scripts, Objections &amp; Adder Strategy</div>
         <div class="module-tag">Income Multiplier</div>
+        <span class="module-unlock-badge">✓ Unlocked</span>
         <div class="module-arrow">+</div>
       </div>
       <div class="module-body">
@@ -274,46 +329,46 @@
           <span class="module-topic">Follow-Up Sequence</span>
         </div>
         <div class="module-actions">
-          <button class="module-btn primary" onclick="showToast('Closing module unlocked after enrollment')">▶ Start Module</button>
-          <button class="module-btn" onclick="showToast('Scripts PDF available after enrollment')">⬇ Scripts &amp; Objection PDF</button>
+          <button class="module-btn primary" data-locked-msg="Closing module unlocked after enrollment" data-unlocked-action="module-video" data-module-id="07">▶ Start Module</button>
+          <button class="module-btn" data-locked-msg="Scripts PDF available after enrollment" data-pdf="assets/docs/d2d-compliance-closing-scripts.pdf">⬇ Scripts &amp; Objection PDF</button>
         </div>
+        <div class="module-locked-notice">🔒 Full module access requires enrollment — <a href="apply.html" style="color:var(--solar-blue);">Apply here</a></div>
       </div>
     </div>
 
+  </div><!-- /modules-list -->
+
+  <!-- Not-enrolled CTA — shown when NOT logged in -->
+  <div id="academy-enroll-cta" style="margin-top:56px;padding:40px;background:rgba(0,102,204,0.05);border:1px solid rgba(0,102,204,0.15);text-align:center;" data-aos="fade-up">
+    <div class="eyebrow" style="justify-content:center;">Not enrolled yet?</div>
+    <h3 style="font-family:var(--font-display);font-size:clamp(1.6rem,3vw,2.8rem);font-weight:300;margin:12px 0 16px;">Unlock all 7 modules<br><em>in 24 hours.</em></h3>
+    <p style="font-size:0.88rem;color:var(--forge-ash);max-width:480px;margin:0 auto 28px;line-height:1.75;">Apply takes 3 minutes. We review and respond personally within 24 business hours. No territory restrictions, no volume commitments.</p>
+    <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;">
+      <a href="apply.html" class="btn-primary green" onclick="trackCTA('Academy Enroll CTA', 'academy')">Apply as a 1099 Rep →</a>
+      <a href="login.html" class="btn-secondary">Already enrolled — Login</a>
+    </div>
   </div>
+
 </section>
 </main>
-<!-- ════════════════════════════════════════════
-     FOOTER
-════════════════════════════════════════════ -->
+
+<!-- FOOTER -->
 <footer>
   <div class="footer-inner">
     <div class="footer-copy">
       © 2026 TiviForge Solar Rep Academy<br>
-      Authorized Axia by Qcells Sales Partner · California · academy@tiviforge.com
+      Authorized Axia by Qcells Sales Partner · California · Tivi@tiviforge.com
     </div>
     <div class="footer-links">
       <a href="about.html">Disclaimers</a>
       <a href="https://www.cslb.ca.gov" target="_blank" rel="noopener">CSLB.gov</a>
-      <a href="mailto:academy@tiviforge.com">Contact</a>
+      <a href="mailto:Tivi@tiviforge.com">Contact</a>
       <a href="apply.html">Apply Now</a>
     </div>
   </div>
 </footer>
-<!-- ════════════════════════════════════════════
-     AI SOLAR COACH WIDGET
-     SYSTEM PROMPT (kept in code for reference):
-     "You are the official TiviForge Solar Expert AI Coach
-     for 1099 California solar sales representatives.
-     Always base answers only on the transparent $2.90/W
-     redline. Never mention owner override or higher margins.
-     Be knowledgeable on Aurora Solar, all CA utilities,
-     NEM 3.0/Net Billing Tariff 2026 avoided-cost export
-     rates (~$0.05–$0.08/kWh), battery systems & SGIP,
-     energy bill reading, CSLB HIS registration, Solar
-     Disclosure Document, Title 24, HSSA rescission rights,
-     and compliant sales practices."
-════════════════════════════════════════════ -->
+
+<!-- AI Solar Coach Widget -->
 <div id="coach-widget">
   <div id="coach-panel">
     <div class="coach-header">
@@ -343,10 +398,79 @@
     <div class="coach-badge">AI</div>
   </button>
 </div>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>window.addEventListener('load', () => { document.body.style.visibility = 'visible'; });</script>
-<script src="main.js?v=20260318b"></script>
-<script src="coach.js?v=20260318b"></script>
+<script src="main.js?v=20260318c"></script>
+<script src="coach.js?v=20260318c"></script>
+
+<script>
+/* ────────────────────────────────────────
+   Academy page — wire up module buttons
+   Called by unlockAcademy() in main.js
+   AND also wires locked state for guests
+──────────────────────────────────────── */
+document.addEventListener('DOMContentLoaded', function() {
+
+  // Show the "not logged in" notice by default
+  const loginNotice = document.getElementById('academy-login-notice');
+  if (loginNotice) loginNotice.style.display = 'block';
+
+  // Wire every module button based on its data attributes
+  document.querySelectorAll('.module-btn[data-locked-msg]').forEach(btn => {
+    btn.addEventListener('click', function(e) {
+      // Check if unlocked
+      if (document.body.classList.contains('academy-unlocked')) {
+        const action = this.dataset.unlockedAction;
+        const pdf    = this.dataset.pdf;
+        const modId  = this.dataset.moduleId;
+
+        if (pdf && action !== 'module-video') {
+          // Trigger download
+          const a = document.createElement('a');
+          a.href = pdf; a.download = '';
+          document.body.appendChild(a); a.click();
+          document.body.removeChild(a);
+        } else if (action === 'module-video') {
+          showToast('✓ Module ' + modId + ' unlocked — full video content arriving Q2 2026. Use the AI Coach for live support.');
+        }
+      } else {
+        // Not logged in — show locked message
+        showToast(this.dataset.lockedMsg || 'Login to access full module content.');
+      }
+    });
+  });
+});
+
+/* Override unlockAcademy so it also sets body class and hides login UI */
+const _originalUnlock = window.unlockAcademy;
+window.unlockAcademy = function(userEmail) {
+  // Add unlocked class to body (shows badges, unlocked styling)
+  document.body.classList.add('academy-unlocked');
+
+  // Hide login notice and enroll CTA
+  const loginNotice = document.getElementById('academy-login-notice');
+  const enrollCta   = document.getElementById('academy-enroll-cta');
+  if (loginNotice) loginNotice.style.display = 'none';
+  if (enrollCta)   enrollCta.style.display   = 'none';
+
+  // Show unlocked bar in hero
+  const bar = document.getElementById('academy-unlocked-bar');
+  if (bar) {
+    bar.style.cssText =
+      'display:block;margin-top:20px;padding:10px 20px;' +
+      'border-left:3px solid var(--energy-green);background:rgba(0,204,102,0.07);' +
+      'max-width:520px;font-family:"DM Mono",monospace;font-size:0.62rem;' +
+      'letter-spacing:0.16em;text-transform:uppercase;color:var(--energy-green);';
+    bar.textContent = '✓ Academy unlocked — logged in as ' + userEmail;
+  }
+
+  // Call the base implementation too if it exists
+  if (typeof _originalUnlock === 'function') _originalUnlock(userEmail);
+
+  showToast('✓ Academy fully unlocked — all 7 modules available');
+};
+</script>
 </body>
 </html>
